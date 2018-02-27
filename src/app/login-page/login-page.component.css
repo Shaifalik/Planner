@@ -1,0 +1,13 @@
+#main-header{
+    color:white;
+    text-align: left ;
+    font-size: 2em;
+}
+
+#page-content{
+    background-color:#5bc0de;
+}
+
+#page-icons{
+    display: float;
+}

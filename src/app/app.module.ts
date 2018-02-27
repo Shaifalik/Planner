@@ -1,16 +1,35 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
-
+import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
+import { NavigatorBarComponent } from './navigator-bar/navigator-bar.component';
+import { HomePageComponent } from './home-page/home-page.component';
+import { LoginPageComponent } from './login-page/login-page.component';
+import { CreatepartyPageComponent } from './createparty-page/createparty-page.component';
+import { PartyNavBarComponent } from './party-nav-bar/party-nav-bar.component';
+import { FoodPageComponent } from './food-page/food-page.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NavigatorBarComponent,
+    HomePageComponent,
+    LoginPageComponent,
+    CreatepartyPageComponent,
+    PartyNavBarComponent,
+    FoodPageComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    FormsModule,
+    RouterModule.forRoot([
+      {path:'home', component:HomePageComponent},
+      {path:'login', component:LoginPageComponent},
+      {path:'login/partyDetails', component:PartyNavBarComponent}
+    ])
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,50 @@
+<div class="container-fluid">
+  <div class="login-page" id="login-page">
+    <div class="row">
+            <div class="col-md-10" id="main-header">
+              Welcome to Party Planner
+            </div>
+            <div class="col-md-2" id="options">
+                <button type="button" class="btn btn-default">Create New Party</button>
+            </div>
+    </div>
+
+    <div class="panel-group">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+              All Parties
+          </div>
+
+    <div class="panel-body" id="page-content">
+          <div class="list-group" *ngFor="let event of events">
+             <a href="#" class="list-group-item list-group-item-info">
+                  <h4 class="list-group-item-heading">{{event.event_name}}</h4>
+                  <p class="list-group-item-text">{{event.event_date}}</p>
+                  <p class="list-group-item-text">{{event.event_description}}</p>
+                  <div class="list-group-item-heading" id="page-icons">
+                    <h5>
+                  <a href="#" data-toggle="tooltip" title="To vote"><i class="glyphicon glyphicon-thumbs-up"></i></a>
+                  <a href="#" data-toggle="tooltip" title="To edit"><i class="glyphicon glyphicon-file"></i></a>
+                  <a href="#" data-toggle="tooltip" title="To delete"><i class="glyphicon glyphicon-remove"></i></a>
+                  </h5></div>
+             </a>
+          </div>
+    </div>
+
+    <div class="text-center">
+        <div class="pagination" id="page-footer">
+            <li class="page-item" *ngFor="let n of pageCount">
+              <a class="page-link" href="#">{{n}}</a>
+            </li>
+         </div>
+     </div>
+  </div>
+</div>
+</div>
+</div>
+
+<script>
+    $(document).ready(function(){
+        $('[data-toggle="tooltip"]').tooltip();   
+    });
+</script>

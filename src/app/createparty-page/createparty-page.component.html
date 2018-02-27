@@ -1,0 +1,64 @@
+<div class="container-fluid">
+  <div class="createparty-page" id="createparty-page">
+
+    <div class="panel-group">
+      <div class="panel panel-default">
+        <div class="panel-heading">Create New Party</div>
+
+        <div class="row">
+          <div class="col-md-8">
+            <div class="panel-body">
+              <form class="form-horizontal" role="form" action="/action.page">
+                <div class="form-group">
+                  <label for="eventName" class="control-label">Event Name:</label>
+                  <input type="text" class="form-control" id="eventName" placeholder="EventName please" />
+                </div>
+
+                <div class="form-group">
+                  <label for="eventDescription" class="control-label">Event Description</label>
+                  <input type="text" class="form-control" id="eventDescription" placeholder="Event description please" />
+                </div>
+
+                <div class="form-group">
+                  <label for="foodOptions" class="control-label">Food Option</label>
+                  <input type="text" class="form-control" id="foodOptions" placeholder="Event description please" />
+                </div>
+
+                <div class="form-group">
+                  <label for="guestLists" class="control-label">Food Option</label>
+                  <input type="text" class="form-control" id="guestLists" placeholder="guestLists please" />
+                </div>
+
+                <div class="form-group">
+                  <label for="Location" class=" control-label">Location</label>
+                  <select class="form-control">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label class="control-label">Event Date</label>
+                  <div class="input-daterange" id="datepicker">
+                    <div class="input-group">
+                      <input type="text" class="input-small form-control" name="start" />
+                      <span class="input-group-addon">to</span>
+                      <input type="text" class="input-small form-control" name="end" />
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <button type="submit" class="btn btn-default">Sign in</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
