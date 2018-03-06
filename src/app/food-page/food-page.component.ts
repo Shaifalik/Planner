@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FoodService } from '../food-page.service';
+import { Food } from '../food';
+import { NgForm } from '@angular/forms/src/directives/ng_form';
 
 @Component({
   selector: 'app-food-page',
@@ -9,34 +11,44 @@ import { FoodService } from '../food-page.service';
 })
 
 export class FoodPageComponent implements OnInit {
-  private food_items;
-  private show_FoodListPanel:boolean=true;
-  private show_FoodDetailsPanel:boolean=false;
-  private foodObject;
-  private itemsList:Array<String>;
-  private fooditem;
+  private foodListPanel:boolean=true;
+  private foodDetailsPanel:boolean=false;
+  private foodItems;
+
+  private foodItemsList:String[];
+  private foodItemsListName:string;
+  private foodItem:string;
 
   constructor(service:FoodService) { 
-   this.food_items=service.getFoodItems();
-   this.foodObject=service.getFoodObject();
+   this.foodItems=service.getFoodItems();
+   this.foodItem='';
+   this.foodItemsListName='';
+   this.foodItemsList=[];
   }
 
   ngOnInit() {
   }
 
   showDetailsPanel (){
-    this.show_FoodListPanel=false;
-    this.show_FoodDetailsPanel=true;
+    this.foodListPanel=false;
+    this.foodDetailsPanel=true;
   }
 
   showListPanel (){
-    this.show_FoodListPanel=true;
-    this.show_FoodDetailsPanel=false;
+    this.foodListPanel=true;
+    this.foodDetailsPanel=false;
   }
 
-  addItems(item:String){
-    this.itemsList.push(item);
-    this.foodObject.itemsList.push(item);
+  addFoodItems(){
+    this.foodItemsList.push(this.foodItem);
+  }
+
+  removeFoodItems(){
+    this.foodItemsList.pop();
+  }
+
+  submitFoodList(newFoodListForm: NgForm){
+    this.foodItemsList=[];
   }
 
 }

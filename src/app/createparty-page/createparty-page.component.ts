@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Events} from '../events';
 
 @Component({
   selector: 'app-createparty-page',
@@ -6,10 +7,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./createparty-page.component.css']
 })
 export class CreatepartyPageComponent implements OnInit {
+  newEventForm:Events;
 
   constructor() { }
 
   ngOnInit() {
+
+  }
+
+  onSubmit(form){
+    this.newEventForm=form;
+    form.reset();
   }
 
 }

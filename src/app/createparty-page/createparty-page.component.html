@@ -5,33 +5,35 @@
       <div class="panel panel-default">
         <div class="panel-heading">Create New Party</div>
 
-        <div class="row">
-          <div class="col-md-8">
-            <div class="panel-body">
-              <form class="form-horizontal" role="form" action="/action.page">
+        <div class="panel-body">
+          <div class="container">
+            <div class="jumbotron">
+
+              <form #neweventForm="ngForm" (ngSubmit)="onSubmit(neweventForm)">
                 <div class="form-group">
                   <label for="eventName" class="control-label">Event Name:</label>
-                  <input type="text" class="form-control" id="eventName" placeholder="EventName please" />
+                  <input type="text" class="form-control" placeholder="EventName please" name="eventName" ngModel required />
                 </div>
 
                 <div class="form-group">
                   <label for="eventDescription" class="control-label">Event Description</label>
-                  <input type="text" class="form-control" id="eventDescription" placeholder="Event description please" />
+                  <input type="text" class="form-control" placeholder="Event description please" name="eventDescription" ngModel required maxlength="100"
+                  />
                 </div>
 
                 <div class="form-group">
-                  <label for="foodOptions" class="control-label">Food Option</label>
-                  <input type="text" class="form-control" id="foodOptions" placeholder="Event description please" />
+                  <label for="eventFoodMenu" class="control-label">Food Option</label>
+                  <input type="text" class="form-control" placeholder="Event description please" name="eventFoodMenu" ngModel required />
                 </div>
 
                 <div class="form-group">
-                  <label for="guestLists" class="control-label">Food Option</label>
-                  <input type="text" class="form-control" id="guestLists" placeholder="guestLists please" />
+                  <label for="eventGuestList" class="control-label">Food Option</label>
+                  <input type="text" class="form-control" placeholder="guestLists please" name="eventGuestList" ngModel required/>
                 </div>
 
                 <div class="form-group">
-                  <label for="Location" class=" control-label">Location</label>
-                  <select class="form-control">
+                  <label for="eventLocation" class="control-label">Location</label>
+                  <select class="form-control" name="eventLocation" ngModel required>
                     <option>1</option>
                     <option>2</option>
                     <option>3</option>
@@ -41,20 +43,10 @@
                 </div>
 
                 <div class="form-group">
-                  <label class="control-label">Event Date</label>
-                  <div class="input-daterange" id="datepicker">
-                    <div class="input-group">
-                      <input type="text" class="input-small form-control" name="start" />
-                      <span class="input-group-addon">to</span>
-                      <input type="text" class="input-small form-control" name="end" />
-                    </div>
-                  </div>
-                </div>
-
-                <div class="form-group">
-                  <button type="submit" class="btn btn-default">Sign in</button>
+                  <button type="submit" class="btn btn-success" [disabled]="!neweventForm.form.valid">Submit</button>
                 </div>
               </form>
+              {{neweventForm.value | json}}
             </div>
           </div>
         </div>

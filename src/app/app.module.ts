@@ -10,6 +10,7 @@ import { LoginPageComponent } from './login-page/login-page.component';
 import { CreatepartyPageComponent } from './createparty-page/createparty-page.component';
 import { PartyNavBarComponent } from './party-nav-bar/party-nav-bar.component';
 import { FoodPageComponent } from './food-page/food-page.component';
+import { OverviewPageComponent } from './overview-page/overview-page.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { FoodPageComponent } from './food-page/food-page.component';
     LoginPageComponent,
     CreatepartyPageComponent,
     PartyNavBarComponent,
-    FoodPageComponent
+    FoodPageComponent,
+    OverviewPageComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +30,8 @@ import { FoodPageComponent } from './food-page/food-page.component';
     RouterModule.forRoot([
       {path:'home', component:HomePageComponent},
       {path:'login', component:LoginPageComponent},
-      {path:'login/partyDetails', component:PartyNavBarComponent}
+      {path:'login/newParty',component:CreatepartyPageComponent},
+      {path:'login/partyDetail/:id', component:PartyNavBarComponent}
     ])
   ],
   providers: [],
