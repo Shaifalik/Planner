@@ -1,3 +1,8 @@
 #page-header{
   width: 100%;
 }
+.party-nav-bar button {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

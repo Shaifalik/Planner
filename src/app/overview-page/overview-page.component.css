@@ -1,0 +1,6 @@
+.overview-page .panel-body, .overview-page .panel-body-date{
+    color: black;
+}
+.overview-page .panel-body-date {
+    font-weight: 600;
+}

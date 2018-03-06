@@ -1,3 +1,7 @@
+html, body {
+    height: 100%;;
+}
+
 .bg-1 { 
     background-color: #1abc9c; /* Green */
      color: #ffffff;

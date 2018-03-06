@@ -1,3 +1,9 @@
-<div>
-    Showing product details for product: {{id}}
-  </div>
+<div class="container-fluid overview-page">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title">{{currentEvent.event_name}}</h3>
+        </div>
+        <div class="panel-body"><strong>{{currentEvent.event_date}}</strong></div>
+        <div class="panel-body"> {{currentEvent.event_description}} </div>
+      </div>
+</div>

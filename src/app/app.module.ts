@@ -30,8 +30,9 @@ import { OverviewPageComponent } from './overview-page/overview-page.component';
     RouterModule.forRoot([
       {path:'home', component:HomePageComponent},
       {path:'login', component:LoginPageComponent},
-      {path:'login/newParty',component:CreatepartyPageComponent},
-      {path:'login/partyDetail/:id', component:PartyNavBarComponent}
+      {path:'login/newParty',component:PartyNavBarComponent},
+      {path:'login/partyDetail/:id', component:PartyNavBarComponent},
+      {path:'login/partyDetail/:id/overview', component:OverviewPageComponent}
     ])
   ],
   providers: [],
