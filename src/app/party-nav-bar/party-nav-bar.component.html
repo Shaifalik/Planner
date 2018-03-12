@@ -1,10 +1,19 @@
-<div class="container-fluid">
-  <div class="party-nav-bar" id="party-nav-bar">
+<div class="container-fluid party-nav-bar" id="party-nav-bar">
+      <div class="row main-header">
+          <h4 class="col-md-10 header-text">
+              Create Party
+          </h4>
+          <div class="col-md-2 header-button">
+              <button type="button" class="btn btn-primary btn-md" (click)="redirectToCreateParty()">Submit Details</button>
+          </div>
+      </div>
     <div class="btn-group" id="page-header">
-      <button type="button" style="width:25%" class="btn btn-primary segmentedButton" (click)="visible=2">New Party</button>
-      <button type="button" style="width:25%" class="btn btn-primary segmentedButton" (click)="visible=3">Food and Beverages</button>
-      <button type="button" style="width:25%" class="btn btn-primary segmentedButton" (click)="visible=4">GuestList</button>
-      <button type="button" style="width:25%" class="btn btn-primary segmentedButton" (click)="visible=5">Location</button>
+      <button type="button" style="width:16.6%" class="btn btn-primary segmentedButton" (click)="visible=2">New Party</button>
+      <button type="button" style="width:16.6%" class="btn btn-primary segmentedButton" (click)="visible=3">Food and Beverages</button>
+      <button type="button" style="width:16.6%" class="btn btn-primary segmentedButton" (click)="visible=4">GuestList</button>
+      <button type="button" style="width:16.6%" class="btn btn-primary segmentedButton" (click)="visible=5">Location</button>
+      <button type="button" style="width:16.6%" class="btn btn-primary segmentedButton" (click)="visible=6">Budget</button>
+      <button type="button" style="width:16.6%" class="btn btn-primary segmentedButton" (click)="visible=6">Settings</button>
     </div>
 
     <div *ngIf="visible === 2">
@@ -14,6 +23,8 @@
       <app-food-page></app-food-page>
     </div>
 
-
-  </div>
+    <div *ngIf="visible === 5">
+        <app-location-page></app-location-page>
+      </div>
+      
 </div>

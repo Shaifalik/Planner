@@ -11,44 +11,29 @@ import { NgForm } from '@angular/forms/src/directives/ng_form';
 })
 
 export class FoodPageComponent implements OnInit {
-  private foodListPanel:boolean=true;
-  private foodDetailsPanel:boolean=false;
-  private foodItems;
+  private foodItemsList: Array<Food>;
+  private foodItem = '';
 
-  private foodItemsList:String[];
-  private foodItemsListName:string;
-  private foodItem:string;
-
-  constructor(service:FoodService) { 
-   this.foodItems=service.getFoodItems();
-   this.foodItem='';
-   this.foodItemsListName='';
-   this.foodItemsList=[];
+  constructor(service: FoodService) {
+   this.foodItemsList = service.getFoodItems();
   }
 
   ngOnInit() {
   }
 
-  showDetailsPanel (){
-    this.foodListPanel=false;
-    this.foodDetailsPanel=true;
+  addNewFoodItem() {
+    if (this.foodItem !== '') {
+    this.foodItemsList.push(new Food(this.foodItem));
+    this.foodItem = '';
+    }
   }
 
-  showListPanel (){
-    this.foodListPanel=true;
-    this.foodDetailsPanel=false;
+  removeFoodItem(index: Number) {
+    this.foodItemsList.splice(index, 1);
   }
 
-  addFoodItems(){
-    this.foodItemsList.push(this.foodItem);
-  }
-
-  removeFoodItems(){
-    this.foodItemsList.pop();
-  }
-
-  submitFoodList(newFoodListForm: NgForm){
-    this.foodItemsList=[];
+  submitFoodList(newFoodItemsForm: NgForm) {
+    console.log('Successful registration');
   }
 
 }

@@ -8,21 +8,20 @@
 
 .inner-form{
 background-color:antiquewhite;
-border-bottom:1px solid #bfbfbf;
 }
 
 .inner-form-group{
 margin-top:2%;
 margin-right:2%;
-margin-bottom:2%;
+margin-bottom: 2%;
 }
 
 .inner-list{
 background-color:antiquewhite;
-margin-bottom: 2%;
 }
 
 span{
-    margin-top: 1% 1% 1% 1%;
-    float:right;
+margin-top: 1% 1% 1% 1%;
+float:right;
 }
+

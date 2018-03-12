@@ -1,0 +1,42 @@
+<div class="container-fluid">
+  <div class="location-page" id="location-page">
+
+    <div class="panel-group">
+      <div class="panel panel-default panel-size">
+        <div class="panel-heading clearfix">
+          <h5 class="panel-title pull-left">Event Location/Restraunt</h5> 
+        </div>
+
+        <div class="panel-body">
+          <form #newLocationForm="ngForm" (ngSubmit)="submitFoodList(newLocationForm)" class="ui form">
+
+            <button type="button" class="btn btn-primary btn-sm pull-right">Edit</button>
+            <button type="submit" class="btn btn-primary btn-sm btn-space pull-right" [disabled]="!newLocationForm.form.valid">
+              Save and Continue</button>
+
+
+            <div class="col-md-8 inner-form" id="innerform">
+              <div class="col-md-4 inner-form-group">
+                <input type="text" [(ngModel)]="eventLoc" name="eventLoc" placeholder="Add Location" required />
+              </div>
+              <div class="col-md-4 inner-form-group">
+                <input type="text" [(ngModel)]="eventAdd" name="eventAdd" placeholder="Add Address" required />
+              </div>
+              <div class="col-md-2 inner-form-group">
+                <button class="btn btn-primary btn-sm" type="button" (click)="addNewLocation()">Add Location</button>
+              </div>
+            </div>
+
+            <div class="col-md-8 inner-list">
+              <div *ngIf="locationList?.length" class="form-row tags-row">
+                <div class="tag" *ngFor="let location of locationList; let ind=index">
+                  {{location.eventLocation}}
+                  <span class="tag-cross" (click)="removeLocation(ind)">X</span>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>

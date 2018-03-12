@@ -3,30 +3,22 @@ import { Food } from './food';
 
 @Injectable()
 export class FoodService {
-  private items:Array<Food>;
-  private itemsList:Array<String>;
+  private foodItems: Array<Food>;
 
   constructor() { }
 
   getFoodItems() {
-    return this.items=[
+    return this.foodItems = [
         {
-          list_name: 'Food1',
-          item_list: ['Burger,Pizza']
+          foodItem: 'Burger'
         },
         {
-          list_name: 'Food2',
-          item_list: ['Burger,Pizza']
+          foodItem: 'Fries'
         },
         {
-          list_name: 'Food2',
-          item_list: ['Burger,Pizza']
+          foodItem: 'Subway'
         }
-    ]
-  }
-
-  getFoodObject(){
-    new Food();
+    ];
   }
 
 }

@@ -1,55 +1,29 @@
-<div class="container-fluid">
-  <div class="createparty-page" id="createparty-page">
+<div class="container-fluid createparty-page" id="createparty-page">
 
-    <div class="panel-group">
-      <div class="panel panel-default">
-        <div class="panel-heading">Create New Party</div>
+  <div class="panel-group">
+    <div class="panel panel-default">
+      <div class="panel-heading clearfix">
+        <h5 class="panel-title pull-left">New Party</h5>
+      </div>
 
-        <div class="panel-body">
-          <div class="container">
-            <div class="jumbotron">
+      <div class="panel-body">
+        <form #neweventForm="ngForm" (ngSubmit)="onSubmit(neweventForm)">
+          <button type="button" class="btn btn-primary btn-sm pull-right" (click)="showListPanel()">Back</button>
+          <button type="submit" class="btn btn-primary btn-sm pull-right" [disabled]="!neweventForm.form.valid">
+            Save & Continue</button>
 
-              <form #neweventForm="ngForm" (ngSubmit)="onSubmit(neweventForm)">
-                <div class="form-group">
-                  <label for="eventName" class="control-label">Event Name:</label>
-                  <input type="text" class="form-control" placeholder="EventName please" name="eventName" ngModel required />
-                </div>
-
-                <div class="form-group">
-                  <label for="eventDescription" class="control-label">Event Description</label>
-                  <input type="text" class="form-control" placeholder="Event description please" name="eventDescription" ngModel required maxlength="100"
-                  />
-                </div>
-
-                <div class="form-group">
-                  <label for="eventFoodMenu" class="control-label">Food Option</label>
-                  <input type="text" class="form-control" placeholder="Event description please" name="eventFoodMenu" ngModel required />
-                </div>
-
-                <div class="form-group">
-                  <label for="eventGuestList" class="control-label">Food Option</label>
-                  <input type="text" class="form-control" placeholder="guestLists please" name="eventGuestList" ngModel required/>
-                </div>
-
-                <div class="form-group">
-                  <label for="eventLocation" class="control-label">Location</label>
-                  <select class="form-control" name="eventLocation" ngModel required>
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                  </select>
-                </div>
-
-                <div class="form-group">
-                  <button type="submit" class="btn btn-success" [disabled]="!neweventForm.form.valid">Submit</button>
-                </div>
-              </form>
-              {{neweventForm.value | json}}
+          <div class="col-md-5 inner-form">
+            <div class="col-md-5 inner-form-group">
+              <input type="text" [(ngModel)]="eventName" placeholder="EventName please" name="eventName" required/>
+            </div>
+          <div class="col-md-5">
+            <div class="col-md-5 inner-form-group">
+              <textarea [(ngModel)]="eventsDesc" placeholder="description please" name="eventDesc" required>
+                  </textarea>
+            </div>
             </div>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   </div>

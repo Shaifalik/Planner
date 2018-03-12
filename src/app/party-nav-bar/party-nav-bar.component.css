@@ -6,3 +6,13 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+
+.main-header .header-button{
+  margin-bottom:.5%;
+}
+
+.main-header .header-text{
+  font:10%;
+}
+
+
