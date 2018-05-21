@@ -28,7 +28,7 @@ export class FoodPageComponent implements OnInit {
     }
   }
 
-  removeFoodItem(index: Number) {
+  removeFoodItem(index: number) {
     this.foodItemsList.splice(index, 1);
   }
 

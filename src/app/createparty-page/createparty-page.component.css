@@ -1,15 +1,19 @@
-.form-group{
-    font-size: 1.2em;
+.panel-body{
     color: black;
-    margin:0px 20px 2px 20px;
 }
 
+.btn-space{
+    margin-right:1%;
+}
 
-#createparty-page{
-    width: 100%;
-  }
-
-#inner-form{
-    float: left;
+.inner-form{
+background-color:antiquewhite;
+border-bottom:1px solid #bfbfbf;
+}
+    
+.inner-form-group{
+margin-top:2%;
+margin-right:2%;
+margin-bottom:2%;
 }
 

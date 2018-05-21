@@ -9,31 +9,42 @@
       <div class="panel-body">
         <form #newFoodItemsForm="ngForm" (ngSubmit)="submitFoodList(newFoodItemsForm)">
 
-          <button type="button" class="btn btn-primary btn-sm pull-right" (click)="showListPanel()">Back</button>
-          <button type="submit" class="btn btn-primary btn-sm pull-right" [disabled]="!newFoodItemsForm.form.valid">
+          <button type="button" class="btn btn-primary btn-sm pull-right" (click)="editFoodList()">Edit</button>
+          <button type="submit" class="btn btn-primary btn-sm pull-right" [disabled]="foodItemsList.length==0">
             Save & Continue</button>
 
           <div class="col-md-8 inner-form" id="innerform">
             <div class="col-md-6 inner-form-group">
-              <input type="text" class="form-control col-md-4" [(ngModel)]="foodItem" name="foodItem" placeholder="Item Name" required />
+              <label class="form-label" for="foodItem">Food Item :</label>
+              <input type="text" class="form-control input-sm" [(ngModel)]="foodItem" name="foodItem" placeholder="Item Name" required
+              />
             </div>
 
-            <div class="col-md-2 inner-form-group">
+            <div class="col-md-2 inner-form-button-group">
               <button class="btn btn-primary btn-md" type="button" (click)="addNewFoodItem()">Add Item</button>
             </div>
 
-            <div class="col-md-6 inner-list">
-              <div *ngIf="foodItemsList?.length" class="form-row tags-row">
-                <div class="tag" *ngFor="let food of foodItemsList; let ind=index">
-                  {{food.foodItem}}
-                  <span class="tag-cross" (click)="removeFoodItem(ind)">X</span>
-                </div>
-              </div>
+            <div class="col-md-8 inner-list">
+              <table class="table foodItems" *ngIf="foodItemsList?.length">
+                  <thead>
+                    <tr>
+                      <th>FoodItems</th>
+                      <th>Delete</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let food of foodItemsList; let ind=index">
+                        <td>{{food.foodItem}}</td>
+                        <td>
+                          <span class="tag-cross" (click)="removeFoodItem(ind)">X</span>
+                        </td>
+                    </tr>
+                  </tbody>
+              </table>
             </div>
           </div>
         </form>
       </div>
-
     </div>
   </div>
 </div>

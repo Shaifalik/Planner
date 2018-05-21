@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import {HttpModule} from '@angular/http';
+import { NgDatepickerModule } from 'ng2-datepicker';
 
 import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
@@ -14,6 +15,7 @@ import { FoodPageComponent } from './food-page/food-page.component';
 import { OverviewPageComponent } from './overview-page/overview-page.component';
 import { ShowErrorsComponent } from './show-errors/show-errors.component';
 import { LocationPageComponent } from './location-page/location-page.component';
+import { BudgetPageComponent } from './budget-page/budget-page.component';
 
 
 @NgModule({
@@ -27,12 +29,14 @@ import { LocationPageComponent } from './location-page/location-page.component';
     FoodPageComponent,
     OverviewPageComponent,
     ShowErrorsComponent,
-    LocationPageComponent
+    LocationPageComponent,
+    BudgetPageComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
+    NgDatepickerModule,
     RouterModule.forRoot([
       {path: 'home', component: HomePageComponent},
       {path: 'login', component: LoginPageComponent},

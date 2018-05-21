@@ -1,0 +1,74 @@
+<div class="container-fluid budget-page" id="budget-page">
+
+  <div class="panel-group">
+    <div class="panel panel-default">
+      <div class="panel-heading clearfix">
+        <h5 class="panel-title pull-left">Budget</h5>
+      </div>
+
+      <div class="panel-body">
+        <form #newBudgetForm="ngForm" (ngSubmit)="submitNewBudget(newBudgetForm)">
+
+          <div class="col-md-12 main-form">
+            <div class="col-md-4 main-form-group">
+              <label class="main-label" for="budgetType">Please select the budget Type</label>
+              <select class="form-control input-sm" [(ngModel)]="budgetType" name="budgetType" required> Select Budget
+                <option>Party Budget</option>
+                <option>Contribution Budget</option>
+              </select>
+              </div>
+
+              <div class="col-md-4 main-form-group">
+                <label class="main-label" for="remainingExpenseAmount"> Remaining Amount :</label>
+                <input type="text" class="form-control input-sm" [(ngModel)]="remainingExpenseAmount" name="remainingExpenseAmount" placeholder="Expense Amount"
+                  required />
+              </div>
+
+            <div class="col-md-3">
+              <button type="button" class="btn btn-primary btn-sm pull-right" (click)="showbutton=1" [disabled]="showbutton===1">Edit</button>
+              <button type="submit" class="btn btn-primary btn-sm btn-space pull-right" (click)="showbutton=0" [disabled]="expensesList.length==0 && !newBudgetForm.form.valid && showbutton===0">
+                Save & Continue</button>
+            </div>
+          </div>
+
+          <div class="col-md-9 col-xs-2 inner-form" id="innerform">
+            <div class="col-md-4 inner-form-group">
+              <label class="form-label" for="expenseName">Expense :</label>
+              <input class="form-control input-sm" [(ngModel)]="expenseName" name="expenseName" placeholder="Expense Name" required/>
+            </div>
+
+            <div class="col-md-3 inner-form-group">
+              <label class="form-label" for="expenseAmount">Amount :</label>
+              <input type="text" class="form-control input-sm" [(ngModel)]="expenseAmount" name="expenseAmount" placeholder="Expense Amount"
+                required />
+            </div>
+
+            <div class="col-md-2 inner-form-button-group">
+              <button class="btn btn-primary btn-md" type="button" (click)="addNewExpense()" [disabled]="showbutton===0">Add Item</button>
+            </div>
+
+            <div class="col-md-8 inner-list">
+              <table class="table budgetExpense" *ngIf="expensesList?.length">
+                <thead>
+                  <tr>
+                    <th>Expense</th>
+                    <th>Cost</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let exp of expensesList; let ind=index">
+                        <td>{{exp.expense_name}}</td>
+                        <td>{{exp.expense_amount}}</td>
+                        <td>
+                          <span class="tag-cross" (click)="removeExpense(ind)">X</span>
+                        </td>
+                    </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

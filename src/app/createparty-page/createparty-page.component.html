@@ -8,19 +8,25 @@
 
       <div class="panel-body">
         <form #neweventForm="ngForm" (ngSubmit)="onSubmit(neweventForm)">
-          <button type="button" class="btn btn-primary btn-sm pull-right" (click)="showListPanel()">Back</button>
-          <button type="submit" class="btn btn-primary btn-sm pull-right" [disabled]="!neweventForm.form.valid">
+          <button type="button" class="btn btn-primary btn-sm pull-right" (click)="showButton=1" [disabled]="showButton===1">Edit</button>
+          <button type="submit" class="btn btn-primary btn-sm btn-space pull-right" (click)="showButton=0" [disabled]="!neweventForm.form.valid || showButton===0">
             Save & Continue</button>
 
-          <div class="col-md-5 inner-form">
-            <div class="col-md-5 inner-form-group">
-              <input type="text" [(ngModel)]="eventName" placeholder="EventName please" name="eventName" required/>
+          <div class="col-md-9 inner-form" id="innerform">
+            <div class="col-md-6 inner-form-group">
+              <label class="form-label" for="eventName"> Event Name:</label>
+              <input class="form-control input-sm" [(ngModel)]="eventName" placeholder="EventName please" name="eventName" required/>
             </div>
-          <div class="col-md-5">
+
             <div class="col-md-5 inner-form-group">
-              <textarea [(ngModel)]="eventsDesc" placeholder="description please" name="eventDesc" required>
-                  </textarea>
+              <label class="form-label" for="eventDesc"> Event Description:</label>
+              <textarea class="form-control input-sm" [(ngModel)]="eventDesc" placeholder="description please" name="eventDesc" required>
+                </textarea>
             </div>
+
+            <div class="col-md-5 inner-form-group">
+              <label class="form-label" for="eventDate">Event Date:</label>
+              <input type="datetime-local" [(ngModel)]="eventDate" name="eventDate"/>
             </div>
           </div>
         </form>

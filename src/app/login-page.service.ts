@@ -4,7 +4,7 @@ import { Events } from './events';
 @Injectable()
 export class LoginPageService {
   private events;
-  private pageCount: number = 0;
+  private pageCount = 0;
 
 
   constructor() {
@@ -16,19 +16,19 @@ export class LoginPageService {
         event_id: 1,
         event_name: 'Jitendras Party',
         event_date: 'Event Date-10/12/2018',
-        event_description: 'Thank you very much for the dinner last night! Thank you because you invited me to come. I really had so much fun with you. The food was fabulous and yummy, wines were outstanding. Thank you. '
+        event_description: 'Thank you very much for the dinner last night! Thank you because you invited me to come.'
       },
       {
         event_id: 2,
         event_name: 'Mahesh Party',
         event_date: 'Event Date-10/12/2018',
-        event_description: 'Thank you very much for the dinner last night! Thank you because you invited me to come. I really had so much fun with you. The food was fabulous and yummy, wines were outstanding. Thank you. '
+        event_description: 'Thank you very much for the dinner last night! Thank you because you invited me to come.'
       },
       {
         event_id: 3,
         event_name: 'Suresh Party',
         event_date: 'Event Date-10/12/2018',
-        event_description: 'Thank you very much for the dinner last night! Thank you because you invited me to come. I really had so much fun with you. The food was fabulous and yummy, wines were outstanding. Thank you. '
+        event_description: 'Thank you very much for the dinner last night! Thank you because you invited me to come.'
       }
     ];
   }

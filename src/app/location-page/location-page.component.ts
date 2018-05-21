@@ -37,7 +37,7 @@ export class LocationPageComponent implements OnInit {
     }
   }
 
-  removeLocation(index: Number) {
+  removeLocation(index: number) {
     this.locationList.splice(index, 1);
   }
 

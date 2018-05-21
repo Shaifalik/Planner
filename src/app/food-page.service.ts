@@ -7,6 +7,7 @@ export class FoodService {
 
   constructor() { }
 
+  // Service to fetch all food items entered in other parties show it in dropdown box.
   getFoodItems() {
     return this.foodItems = [
         {
@@ -20,5 +21,7 @@ export class FoodService {
         }
     ];
   }
+
+  // Service to store the unique food Items list in food table on Save and Continue.
 
 }

@@ -1,6 +1,6 @@
 export class Location {
-    eventLocation: string;
-    eventAddress: string;
+    eventLocation: String;
+    eventAddress: String;
     constructor(eventLocation: String, eventAddress: String) {
         this.eventLocation = eventLocation;
         this.eventAddress = eventAddress;

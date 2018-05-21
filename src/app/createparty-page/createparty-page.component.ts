@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Events } from '../events';
 import { FoodService } from '../food-page.service';
-import { Food } from '../food';
 
 @Component({
   selector: 'app-createparty-page',
@@ -11,10 +10,8 @@ import { Food } from '../food';
 })
 export class CreatepartyPageComponent implements OnInit {
   newEventForm: Events;
-  foodItemsList: Food[];
 
   constructor(service: FoodService) {
-    this.foodItemsList = service.getFoodItems();
   }
 
   ngOnInit() {
@@ -23,7 +20,6 @@ export class CreatepartyPageComponent implements OnInit {
 
   onSubmit(form) {
     this.newEventForm = form;
-    form.reset();
   }
 
 }

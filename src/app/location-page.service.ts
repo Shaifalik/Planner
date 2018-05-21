@@ -23,7 +23,7 @@ export class LocationPageService {
     return this._http.post(url, formData)
         .map((response: Response) => {
             return response;
-        }).catch(this.handleError);
+        });
 }
 
 }
