@@ -2,5 +2,10 @@
       {
         "eventLocation": "Barbeque",
         "eventAddress": "Mayur Vihar"
+      },
+
+      {
+        "eventLocation": "Baa",
+        "eventAddress": "Mayur Vihar"
       }
 ]

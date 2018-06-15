@@ -1,8 +1,8 @@
-import { BudgetPageService } from './../budget-page.service';
 import { NgForm } from '@angular/forms/src/directives/ng_form';
-import { Budget } from './../budget';
-import { Expense } from './../expense';
 import { Component, OnInit } from '@angular/core';
+import { Expense } from '../party-pojo/expense';
+import { Budget } from '../party-pojo/budget';
+import { BudgetPageService } from '../party-service/budget-page.service';
 
 @Component({
   selector: 'app-budget-page',

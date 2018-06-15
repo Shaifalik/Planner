@@ -4,15 +4,16 @@
     <div class="panel-group">
       <div class="panel panel-default panel-size">
         <div class="panel-heading clearfix">
-          <h5 class="panel-title pull-left">Event Location/Restraunt</h5>
+          <h5 class="panel-title pull-left">Event Location</h5>
+          <h5 class="panel-title pull-right">{{details}}</h5>
         </div>
 
         <div class="panel-body">
-          <form #newLocationForm="ngForm" (ngSubmit)="submitFoodList(newLocationForm)" class="ui form">
+          <form #newLocationForm="ngForm" (ngSubmit)="onSubmit()" class="ui form">
 
-            <button type="button" class="btn btn-primary btn-sm pull-right">Edit</button>
-            <button type="submit" class="btn btn-primary btn-sm btn-space pull-right" [disabled]="locationList.length==0">
-              Save and Continue</button>
+            <button type="button" class="btn btn-primary btn-sm pull-right" [class.disabled]="!isClickedOnce" (click)="isClickedOnce = false">Edit</button>
+            <button type="submit" class="btn btn-primary btn-sm btn-space pull-right" [class.disabled]="locationList.length==0 || isClickedOnce" (click)="isClickedOnce = true">
+              Submit and Continue</button>
 
 
             <div class="col-md-8 inner-form" id="innerform">
@@ -25,7 +26,7 @@
                 />
               </div>
               <div class="col-md-2 inner-form-group">
-                <button class="btn btn-primary btn-sm" type="button" (click)="addNewLocation()">Add Location</button>
+                <button class="btn btn-primary btn-sm" type="button" (click)="addNewLocation()" [class.disabled]="isClickedOnce">Add Location</button>
               </div>
             </div>
 

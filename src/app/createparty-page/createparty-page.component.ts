@@ -1,25 +1,22 @@
 import { Component, OnInit } from '@angular/core';
-import { Events } from '../events';
-import { FoodService } from '../food-page.service';
+import { Event } from '../party-pojo/event';
+import { NgForm } from '@angular/forms';
+import { CreatepartyService } from '../party-service/createparty.service';
 
 @Component({
   selector: 'app-createparty-page',
   templateUrl: './createparty-page.component.html',
   styleUrls: ['./createparty-page.component.css'],
-  providers: [FoodService]
+  providers: [CreatepartyService]
 })
-export class CreatepartyPageComponent implements OnInit {
-  newEventForm: Events;
+export class CreatepartyPageComponent {
+  newEvent: Event;
 
-  constructor(service: FoodService) {
-  }
+  constructor(private service: CreatepartyService) { }
 
-  ngOnInit() {
-
-  }
-
-  onSubmit(form) {
-    this.newEventForm = form;
+  onSubmit(newEventForm: NgForm) {
+    this.service.setEventObject(newEventForm.value);
+    console.log("event data submitted");
   }
 
 }

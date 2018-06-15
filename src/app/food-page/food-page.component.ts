@@ -1,38 +1,38 @@
 import { Component, OnInit } from '@angular/core';
-import { FoodService } from '../food-page.service';
-import { Food } from '../food';
 import { NgForm } from '@angular/forms/src/directives/ng_form';
+import { Food } from '../party-pojo/food';
+import { FoodListService } from '../party-service/food-page.service';
 
 @Component({
   selector: 'app-food-page',
   templateUrl: './food-page.component.html',
   styleUrls: ['./food-page.component.css'],
-  providers: [FoodService]
+  providers: [FoodListService]
 })
 
 export class FoodPageComponent implements OnInit {
-  private foodItemsList: Array<Food>;
+  private foodList: Array<Food>;
   private foodItem = '';
 
-  constructor(service: FoodService) {
-   this.foodItemsList = service.getFoodItems();
-  }
+  constructor(private service: FoodListService) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
+    this.foodList=[];
   }
 
   addNewFoodItem() {
     if (this.foodItem !== '') {
-    this.foodItemsList.push(new Food(this.foodItem));
+    this.foodList.push(new Food(this.foodItem));
     this.foodItem = '';
     }
   }
 
   removeFoodItem(index: number) {
-    this.foodItemsList.splice(index, 1);
+    this.foodList.splice(index, 1);
   }
 
   submitFoodList(newFoodItemsForm: NgForm) {
+    this.service.setFoodObject(newFoodItemsForm.value);
     console.log('Successful registration');
   }
 

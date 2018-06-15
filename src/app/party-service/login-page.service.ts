@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Events } from './events';
+import { Food } from '../party-pojo/food';
 
 @Injectable()
 export class LoginPageService {
   private events;
   private pageCount = 0;
-
 
   constructor() {
   }
@@ -33,7 +32,7 @@ export class LoginPageService {
     ];
   }
 
-  getPaginationCount(array: Array<Events>) {
+  getPaginationCount(array: Array<Event>) {
     this.pageCount = array.length / 3;
     this.pageCount = this.pageCount + array.length % 3;
     return new Array(this.pageCount);

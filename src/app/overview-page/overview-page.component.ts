@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { LoginPageService } from '../login-page.service';
+import { LoginPageService } from '../party-service/login-page.service';
 
 @Component({
   selector: 'app-overview-page',

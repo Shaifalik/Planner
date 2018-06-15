@@ -16,6 +16,8 @@ import { OverviewPageComponent } from './overview-page/overview-page.component';
 import { ShowErrorsComponent } from './show-errors/show-errors.component';
 import { LocationPageComponent } from './location-page/location-page.component';
 import { BudgetPageComponent } from './budget-page/budget-page.component';
+import { FoodListService } from './party-service/food-page.service';
+import { CreatepartyService } from './party-service/createparty.service';
 
 
 @NgModule({
@@ -38,6 +40,7 @@ import { BudgetPageComponent } from './budget-page/budget-page.component';
     HttpModule,
     NgDatepickerModule,
     RouterModule.forRoot([
+      {path: '', redirectTo: 'home',pathMatch: 'full'},
       {path: 'home', component: HomePageComponent},
       {path: 'login', component: LoginPageComponent},
       {path: 'login/newParty', component: PartyNavBarComponent},
@@ -45,7 +48,7 @@ import { BudgetPageComponent } from './budget-page/budget-page.component';
       {path: 'login/partyDetail/:id/overview', component: OverviewPageComponent}
     ])
   ],
-  providers: [],
+  providers: [FoodListService,CreatepartyService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

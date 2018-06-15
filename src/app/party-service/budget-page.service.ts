@@ -1,5 +1,5 @@
-import { Expense } from './expense';
 import { Injectable } from '@angular/core';
+import { Expense } from '../party-pojo/expense';
 
 @Injectable()
 export class BudgetPageService {

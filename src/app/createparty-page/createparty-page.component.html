@@ -7,9 +7,9 @@
       </div>
 
       <div class="panel-body">
-        <form #neweventForm="ngForm" (ngSubmit)="onSubmit(neweventForm)">
+        <form #newEventForm="ngForm" (ngSubmit)="onSubmit(newEventForm)">
           <button type="button" class="btn btn-primary btn-sm pull-right" (click)="showButton=1" [disabled]="showButton===1">Edit</button>
-          <button type="submit" class="btn btn-primary btn-sm btn-space pull-right" (click)="showButton=0" [disabled]="!neweventForm.form.valid || showButton===0">
+          <button type="submit" class="btn btn-primary btn-sm btn-space pull-right" [disabled]="!newEventForm.form.valid">
             Save & Continue</button>
 
           <div class="col-md-9 inner-form" id="innerform">
@@ -26,7 +26,7 @@
 
             <div class="col-md-5 inner-form-group">
               <label class="form-label" for="eventDate">Event Date:</label>
-              <input type="datetime-local" [(ngModel)]="eventDate" name="eventDate"/>
+              <input type="datetime-local" [(ngModel)]="eventDate" name="eventDate" required/>
             </div>
           </div>
         </form>

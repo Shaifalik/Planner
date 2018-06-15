@@ -10,7 +10,7 @@
         <form #newFoodItemsForm="ngForm" (ngSubmit)="submitFoodList(newFoodItemsForm)">
 
           <button type="button" class="btn btn-primary btn-sm pull-right" (click)="editFoodList()">Edit</button>
-          <button type="submit" class="btn btn-primary btn-sm pull-right" [disabled]="foodItemsList.length==0">
+          <button type="submit" class="btn btn-primary btn-sm pull-right" [disabled]="foodList.length==0">
             Save & Continue</button>
 
           <div class="col-md-8 inner-form" id="innerform">
@@ -25,7 +25,7 @@
             </div>
 
             <div class="col-md-8 inner-list">
-              <table class="table foodItems" *ngIf="foodItemsList?.length">
+              <table class="table foodItems" *ngIf="foodList?.length">
                   <thead>
                     <tr>
                       <th>FoodItems</th>
@@ -33,7 +33,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr *ngFor="let food of foodItemsList; let ind=index">
+                    <tr *ngFor="let food of foodList; let ind=index">
                         <td>{{food.foodItem}}</td>
                         <td>
                           <span class="tag-cross" (click)="removeFoodItem(ind)">X</span>

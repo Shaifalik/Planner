@@ -7,7 +7,7 @@ export class Budget {
     contri_budget: Number;
     expenses: Array<Expense>;
 
-    constructor(new_party_budget: Number, new_contri_budget: Number, new_expenses: Array<Expense>) {
+    constructor(private new_party_budget: Number,private new_contri_budget: Number,private new_expenses: Array<Expense>) {
         this.party_budget = new_party_budget;
         this.contri_budget = new_contri_budget;
         this.expenses = new_expenses;
