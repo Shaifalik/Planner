@@ -1,29 +1,25 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
-import { Event } from '../party-pojo/event';
 import { EventDetails } from '../party-pojo/event-details';
-import { FoodListService } from './food-page.service';
-import { CreatepartyService } from './createparty.service';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 @Injectable()
 export class PartyDetailsService {
-  event:Event;
-  eventDetails: EventDetails;
+  private eventDetailsObject = new EventDetails();
+  private eventDetails = new BehaviorSubject<EventDetails>(this.eventDetailsObject);
+  cast = this.eventDetails.asObservable();
 
-  constructor(private http: Http, private foodService: FoodListService, private eventService: CreatepartyService) { }
+  constructor(private http: Http) { }
 
-  //Convert the EventDetail object to JSON
-  createEventDetailObject() {
-    console.log(this.eventService.getEventObject());
-    console.log(JSON.stringify(new EventDetails(this.eventService.getEventObject(), this.foodService.getFoodObject())));
-    return JSON.stringify(this.eventDetails);
+  editEventDetails(eventUpdatedDetails) {
+    this.eventDetails.next(eventUpdatedDetails);
   }
 
-  postEventData(model: any) {
+  postEventDetailData(model: any) {
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
     let options = new RequestOptions({ headers: headers });
-    return this.http.post('http://localhost:18080/createEvent', model,options).map((response: Response) => response.text());
+    return this.http.post('http://localhost:8081/rest/createEvent', JSON.stringify(model), options).map((response: Response) => response.text());
   }
 
 }

@@ -1,12 +1,9 @@
 <div class="container-fluid party-nav-bar" id="party-nav-bar">
-      <div class="row main-header">
-          <h4 class="col-md-10 header-text">
-              Create Party
-          </h4>
-          <div class="col-md-2 header-button">
-              <button type="button" class="btn btn-primary btn-md" (click)="submitPartyDetails()">Submit Details</button>
-          </div>
-      </div>
+
+  <form #eventForm="ngForm" (ngSubmit)="onSubmit()" class="ui form">
+    <button type="submit" class="btn btn-primary btn-md pull-right">Submit Details</button>
+    <h4 class="pull-left">Create party</h4>
+
     <div class="btn-group" id="page-header">
       <button type="button" style="width:20%" class="btn btn-primary segmentedButton" (click)="visible=2">New Party</button>
       <button type="button" style="width:20%" class="btn btn-primary segmentedButton" (click)="visible=3">Food and Beverages</button>
@@ -22,12 +19,16 @@
       <app-food-page></app-food-page>
     </div>
 
-    <div *ngIf="visible === 5">
-        <app-location-page></app-location-page>
-      </div>
+    <div *ngIf="visible === 4">
+      <app-guest-page></app-guest-page>
+    </div>
 
-      <div *ngIf="visible === 6">
-        <app-budget-page></app-budget-page>
-      </div>
-      
+    <div *ngIf="visible === 5">
+      <app-location-page></app-location-page>
+    </div>
+
+    <div *ngIf="visible === 6">
+      <app-budget-page></app-budget-page>
+    </div>
+  </form>
 </div>

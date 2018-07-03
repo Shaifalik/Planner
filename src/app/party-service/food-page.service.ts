@@ -1,16 +1,23 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { Food } from '../party-pojo/food';
+import { PartyDetailsService } from './party-details.service';
+import { EventDetails } from '../party-pojo/event-details';
 
 @Injectable()
-export class FoodListService {
-  private foodItemsList: Array<Food>;
+export class FoodPageService {
+  private eventDetailsObject: EventDetails;
 
-  setFoodObject(foodList: Array<Food>) {
-    this.foodItemsList = foodList;
+  constructor(private service: PartyDetailsService) {
+    this.service.cast.subscribe(eventDetails => this.eventDetailsObject = eventDetails);
   }
 
-  getFoodObject() {
-    return this.foodItemsList;
+  saveFoodList(foodList: Array<Food>) {
+    this.eventDetailsObject.foodList = foodList;
+    this.service.editEventDetails(this.eventDetailsObject);
+    console.log(this.eventDetailsObject);
   }
+
+
+
 
 }

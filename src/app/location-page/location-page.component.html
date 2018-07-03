@@ -9,47 +9,50 @@
         </div>
 
         <div class="panel-body">
-          <form #newLocationForm="ngForm" (ngSubmit)="onSubmit()" class="ui form">
+          <form #newLocationForm="ngForm" (ngSubmit)="onLocationSubmit()" class="ui form">
 
-            <button type="button" class="btn btn-primary btn-sm pull-right" [class.disabled]="!isClickedOnce" (click)="isClickedOnce = false">Edit</button>
-            <button type="submit" class="btn btn-primary btn-sm btn-space pull-right" [class.disabled]="locationList.length==0 || isClickedOnce" (click)="isClickedOnce = true">
+            <button type="button" class="btn btn-primary btn-sm pull-right" [disabled]="!isClickedOnce" (click)="isClickedOnce = false">Edit</button>
+            <button type="submit" class="btn btn-primary btn-sm btn-space pull-right" [disabled]="locationList.length==0 || isClickedOnce"
+              >
               Submit and Continue</button>
+            <fieldset [disabled]="isClickedOnce">
 
 
-            <div class="col-md-8 inner-form" id="innerform">
-              <div class="col-md-4 inner-form-group">
-                <input type="text" class="form-control input-sm" [(ngModel)]="eventLoc" name="eventLoc" placeholder="Add Location" required
-                />
+              <div class="col-md-8 inner-form" id="innerform">
+                <div class="col-md-4 inner-form-group">
+                  <input type="text" class="form-control input-sm" [(ngModel)]="eventLoc" name="eventLoc" placeholder="Add Location" required
+                  />
+                </div>
+                <div class="col-md-4 inner-form-group">
+                  <input type="text" class="form-control input-sm" [(ngModel)]="eventAdd" name="eventAdd" placeholder="Add Address" required
+                  />
+                </div>
+                <div class="col-md-2 inner-form-group">
+                  <button class="btn btn-primary btn-sm" type="button" (click)="addNewLocation()" [class.disabled]="isClickedOnce">Add Location</button>
+                </div>
               </div>
-              <div class="col-md-4 inner-form-group">
-                <input type="text" class="form-control input-sm" [(ngModel)]="eventAdd" name="eventAdd" placeholder="Add Address" required
-                />
-              </div>
-              <div class="col-md-2 inner-form-group">
-                <button class="btn btn-primary btn-sm" type="button" (click)="addNewLocation()" [class.disabled]="isClickedOnce">Add Location</button>
-              </div>
-            </div>
+            </fieldset>
 
-            <div class="col-md-8 inner-list">
-              <table class="table Location" *ngIf="locationList?.length">
-                <thead>
-                  <tr>
-                    <th>Location</th>
-                    <th>Address</th>
-                    <th>Option</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let location of locationList; let ind=index">
-                    <td>{{location.eventLocation}}</td>
-                    <td>{{location.eventAddress}}</td>
-                    <td>
-                      <span class="tag-cross" (click)="removeLocation(ind)">X</span>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+              <div class="col-md-8 inner-list">
+                <table class="table Location" *ngIf="locationList?.length">
+                  <thead>
+                    <tr>
+                      <th>Location</th>
+                      <th>Address</th>
+                      <th>Option</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let location of locationList; let ind=index">
+                      <td>{{location.eventLocation}}</td>
+                      <td>{{location.eventAddress}}</td>
+                      <td>
+                        <span class="tag-cross" (click)="removeLocation(ind)">X</span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
           </form>
         </div>
       </div>

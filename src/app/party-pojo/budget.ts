@@ -1,27 +1,47 @@
-import { Expense } from './expense';
 import { Injectable } from '@angular/core';
+import { Expense } from './expense';
 
 @Injectable()
 export class Budget {
-    party_budget: Number;
-    contri_budget: Number;
-    expenses: Array<Expense>;
-
-    constructor(private new_party_budget: Number,private new_contri_budget: Number,private new_expenses: Array<Expense>) {
-        this.party_budget = new_party_budget;
-        this.contri_budget = new_contri_budget;
-        this.expenses = new_expenses;
+    private _budgetId: number;
+    private _budgetCategoryId: number;
+    private _totalExpense: number;
+    private _totalQuantity: number;
+    private _expenseList: Array<Expense>;
+    
+    public get expenseList(): Array<Expense> {
+        return this._expenseList;
+    }
+    public set expenseList(value: Array<Expense>) {
+        this._expenseList = value;
     }
 
-    setPartyBudget(new_party_budget: Number) {
-        this.party_budget = new_party_budget;
+    public get totalQuantity(): number {
+        return this._totalQuantity;
+    }
+    public set totalQuantity(value: number) {
+        this._totalQuantity = value;
+    }
+    public get totalExpense(): number {
+        return this._totalExpense;
+    }
+    public set totalExpense(value: number) {
+        this._totalExpense = value;
     }
 
-    setContriBudget(new_contri_budget: Number) {
-        this.contri_budget = new_contri_budget;
+    public get budgetId(): number {
+        return this._budgetId;
+    }
+    public set budgetId(value: number) {
+        this._budgetId = value;
     }
 
-    setNewExpenses(new_expenses: Array<Expense>) {
-        this.expenses = new_expenses;
+    public get budgetCategoryId(): number {
+        return this._budgetCategoryId;
     }
+    public set budgetCategoryId(value: number) {
+        this._budgetCategoryId = value;
+    }
+
 }
+

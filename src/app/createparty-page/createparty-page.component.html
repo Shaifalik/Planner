@@ -8,27 +8,34 @@
 
       <div class="panel-body">
         <form #newEventForm="ngForm" (ngSubmit)="onSubmit(newEventForm)">
-          <button type="button" class="btn btn-primary btn-sm pull-right" (click)="showButton=1" [disabled]="showButton===1">Edit</button>
-          <button type="submit" class="btn btn-primary btn-sm btn-space pull-right" [disabled]="!newEventForm.form.valid">
+          <button type="button" class="btn btn-primary btn-sm pull-right" (click)="isClickedOnce= false" [disabled]="!isClickedOnce">Edit</button>
+          <button type="submit" class="btn btn-primary btn-sm btn-space pull-right" [disabled]="!newEventForm.form.valid || isClickedOnce">
             Save & Continue</button>
+          <fieldset [disabled]="isClickedOnce">
 
-          <div class="col-md-9 inner-form" id="innerform">
-            <div class="col-md-6 inner-form-group">
-              <label class="form-label" for="eventName"> Event Name:</label>
-              <input class="form-control input-sm" [(ngModel)]="eventName" placeholder="EventName please" name="eventName" required/>
-            </div>
+            <div class="col-md-9 inner-form" id="innerform">
+              <div class="col-md-6 inner-form-group">
+                <label class="form-label" for="inputEventName"> Event Name:</label>
+                <input id="inputEventName" type="text" class="form-control input-sm" name="eventName" [(ngModel)]="model.eventName" placeholder="EventName please"
+                  #eventName="ngModel" required/>
+                <app-show-errors [control]="eventName"></app-show-errors>
+              </div>
 
-            <div class="col-md-5 inner-form-group">
-              <label class="form-label" for="eventDesc"> Event Description:</label>
-              <textarea class="form-control input-sm" [(ngModel)]="eventDesc" placeholder="description please" name="eventDesc" required>
+              <div class="col-md-5 inner-form-group">
+                <label class="form-label" for="inputEventDesc"> Event Description:</label>
+                <textarea id="inputEventDesc" class="form-control input-sm" [(ngModel)]="model.eventDesc" placeholder="description please"
+                  name="eventDesc" #eventDesc="ngModel" minlength="5" maxlength="200" required>
                 </textarea>
-            </div>
+                <app-show-errors [control]="eventDesc"></app-show-errors>
+              </div>
 
-            <div class="col-md-5 inner-form-group">
-              <label class="form-label" for="eventDate">Event Date:</label>
-              <input type="datetime-local" [(ngModel)]="eventDate" name="eventDate" required/>
+              <div class="col-md-5 inner-form-group">
+                <label class="form-label" for="eventDate">Event Date:</label>
+                <input type="datetime-local" [(ngModel)]="model.eventDate" name="eventDate" #eventDate="ngModel" required/>
+                <app-show-errors [control]="eventDate"></app-show-errors>
+              </div>
             </div>
-          </div>
+          </fieldset>
         </form>
       </div>
     </div>

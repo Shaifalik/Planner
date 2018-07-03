@@ -3,35 +3,22 @@ import { Observable } from 'rxjs/Observable';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Location } from '../party-pojo/Location';
+import { PartyDetailsService } from './party-details.service';
+import { EventDetails } from '../party-pojo/event-details';
 
 @Injectable()
 export class LocationPageService {
-  private headers = new Headers({ 'Content-Type': 'application/text' });
 
-  constructor(private _http: Http) { }
+  private eventDetailsObject: EventDetails;
 
-  getLocations(): Observable<Location[]> {
-    return this._http
-      .get('../../assets/APIS/Location.json')
-      .map((response: Response) => <Location[]>response.json());
+  constructor(private service: PartyDetailsService){ 
+  this.service.cast.subscribe(eventDetails => this.eventDetailsObject = eventDetails);
   }
 
-  post(url: string, model: any): Observable<any> {
-    let formData: FormData = new FormData();
-    formData.append('id', model.id);
-    formData.append('applicationName', model.applicationName);
-    return this._http.post(url, formData)
-      .map((response: Response) => {
-        return response;
-      });
-  }
-
-  getLocationDetails() {
-    return this._http.get('http://localhost:18080/hello').map((response: Response) => response.text());
-  }
-
-  postLocationList(model: Array<Location>) {
-    return this._http.post('http://localhost:18080/setLocationsList', model).map((response: Response) => response.text());
+  saveLocationList(LocationList:Array<Location>){
+    this.eventDetailsObject.locationList=LocationList;
+    this.service.editEventDetails(this.eventDetailsObject);
+    console.log(this.eventDetailsObject);
   }
 
 }

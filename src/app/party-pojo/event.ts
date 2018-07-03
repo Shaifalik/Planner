@@ -4,8 +4,13 @@ import { Location } from './location';
 
 @Injectable()
 export class Event {
+    eventName: string;
+    eventDesc: string;
+    eventDate: Date;
 
-    constructor(private event_name: string, private event_description: string, private event_date: DateTimeFormat) {
-
+    constructor(event_name: string, event_description: string, event_date: Date) {
+        this.eventName = event_name;
+        this.eventDate = event_date;
+        this.eventDesc = event_description;
     }
 }

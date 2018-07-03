@@ -7,65 +7,95 @@
       </div>
 
       <div class="panel-body">
-        <form #newBudgetForm="ngForm" (ngSubmit)="submitNewBudget(newBudgetForm)">
+        <form #budgetForm="ngForm" (ngSubmit)="onSubmit(budgetForm)">
 
           <div class="col-md-12 main-form">
-            <div class="col-md-4 main-form-group">
-              <label class="main-label" for="budgetType">Please select the budget Type</label>
-              <select class="form-control input-sm" [(ngModel)]="budgetType" name="budgetType" required> Select Budget
-                <option>Party Budget</option>
-                <option>Contribution Budget</option>
-              </select>
+            <fieldset class="col-md-10 main-form" [disabled]="isClickedOnce">
+              <div class="col-md-3 main-form-group">
+                <label class="main-label" for="budgetCategory">Select Budget</label>
+                <select id="budgetCategory" class="form-control input-sm" [(ngModel)]="category.categoryName" name="categoryName" #budgetCategory="ngModel"
+                  required> Select Budget
+                  <option>Party Budget</option>
+                  <option>Contribution Budget</option>
+                </select>
+                <app-show-errors [control]="food"></app-show-errors>
               </div>
 
-              <div class="col-md-4 main-form-group">
-                <label class="main-label" for="remainingExpenseAmount"> Remaining Amount :</label>
-                <input type="text" class="form-control input-sm" [(ngModel)]="remainingExpenseAmount" name="remainingExpenseAmount" placeholder="Expense Amount"
-                  required />
+              <div class="col-md-2 main-form-group">
+                <label class="main-label" for="budgetAmount"> Budget Amount :</label>
+                <input id="budgetAmount" type="number" class="form-control input-sm" [(ngModel)]="category.categoryAmount" name="categoryAmount"
+                  placeholder="Budget Amount" />
               </div>
 
-            <div class="col-md-3">
-              <button type="button" class="btn btn-primary btn-sm pull-right" (click)="showbutton=1" [disabled]="showbutton===1">Edit</button>
-              <button type="submit" class="btn btn-primary btn-sm btn-space pull-right" (click)="showbutton=0" [disabled]="expensesList.length==0 && !newBudgetForm.form.valid && showbutton===0">
-                Save & Continue</button>
+              <div class="col-md-2 main-form-group">
+                <label class="main-label" for="totalExpense">Total Expense</label>
+                <input type="number" class="form-control input-sm pull-right" [(ngModel)]="budget.totalExpense" name="totalExpense" placeholder="0">
+              </div>
+
+              <div class="col-md-3 main-form-group">
+                <label class="main-label" for="totalAmount"> Total Quantity :</label>
+                <input type="number" class="form-control input-sm pull-right" [(ngModel)]="budget.totalQuantity" name="totalQuantity" placeholder="0"
+                />
+              </div>
+            </fieldset>
+
+            <div class="col-lg-2">
+              <button type="button" class="btn btn-primary btn-sm pull-right" (click)="isClickedOnce= false" [disabled]="!isClickedOnce">Edit</button>
+              <button type="submit" class="btn btn-primary btn-sm btn-space pull-right" [disabled]="expensesList.length==0 || isClickedOnce">
+                Save</button>
             </div>
+
           </div>
 
-          <div class="col-md-9 col-xs-2 inner-form" id="innerform">
-            <div class="col-md-4 inner-form-group">
-              <label class="form-label" for="expenseName">Expense :</label>
-              <input class="form-control input-sm" [(ngModel)]="expenseName" name="expenseName" placeholder="Expense Name" required/>
-            </div>
+          <div class="col-md-10 col-xs-2 inner-form" id="innerform">
+            <fieldset [disabled]="isClickedOnce">
+              <div class="col-md-3 inner-form-group">
+                <label class="form-label" for="foodName">Expense :</label>
+                <input id="foodName" type="text" class="form-control input-sm" [(ngModel)]="expense.food" name="food" #food="ngModel" placeholder="Food Name"
+                  required/>
+                <app-show-errors [control]="food"></app-show-errors>
+              </div>
 
-            <div class="col-md-3 inner-form-group">
-              <label class="form-label" for="expenseAmount">Amount :</label>
-              <input type="text" class="form-control input-sm" [(ngModel)]="expenseAmount" name="expenseAmount" placeholder="Expense Amount"
-                required />
-            </div>
+              <div class="col-md-3 inner-form-group">
+                <label class="form-label" for="foodQuantity">Quantity :</label>
+                <input id="foodQuantity" type="number" class="form-control input-sm" [(ngModel)]="expense.quantity" name="quantity" #quantity="ngModel"
+                  placeholder="Food Quantity" required />
+                <app-show-errors [control]="quantity"></app-show-errors>
+              </div>
 
-            <div class="col-md-2 inner-form-button-group">
-              <button class="btn btn-primary btn-md" type="button" (click)="addNewExpense()" [disabled]="showbutton===0">Add Item</button>
-            </div>
+              <div class="col-md-3 inner-form-group">
+                <label class="form-label" for="expenseAmount">Amount :</label>
+                <input id="expenseAmount" type="number" class="form-control input-sm" [(ngModel)]="expense.amount" name="amount" #amount="ngModel"
+                  placeholder="Expense Amount" required />
+                <app-show-errors [control]="amount"></app-show-errors>
+              </div>
 
-            <div class="col-md-8 inner-list">
-              <table class="table budgetExpense" *ngIf="expensesList?.length">
-                <thead>
-                  <tr>
-                    <th>Expense</th>
-                    <th>Cost</th>
-                  </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let exp of expensesList; let ind=index">
-                        <td>{{exp.expense_name}}</td>
-                        <td>{{exp.expense_amount}}</td>
-                        <td>
-                          <span class="tag-cross" (click)="removeExpense(ind)">X</span>
-                        </td>
+              <div class="col-md-1 inner-form-button-group">
+                <button class="btn btn-primary btn-md" type="button" (click)="addNewExpense()">Add Item</button>
+              </div>
+
+              <div class="col-md-8 inner-list">
+                <table class="table budgetExpense" *ngIf="expensesList?.length">
+                  <thead>
+                    <tr>
+                      <th>Food</th>
+                      <th>Quantity</th>
+                      <th>Amount</th>
                     </tr>
-                </tbody>
-              </table>
-            </div>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let exp of expensesList; let ind=index">
+                      <td>{{exp.food}}</td>
+                      <td>{{exp.quantity}}</td>
+                      <td>{{exp.amount}}</td>
+                      <td>
+                        <span class="tag-cross" (click)="removeExpense(ind)">X</span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </fieldset>
           </div>
         </form>
       </div>

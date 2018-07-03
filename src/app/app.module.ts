@@ -16,8 +16,10 @@ import { OverviewPageComponent } from './overview-page/overview-page.component';
 import { ShowErrorsComponent } from './show-errors/show-errors.component';
 import { LocationPageComponent } from './location-page/location-page.component';
 import { BudgetPageComponent } from './budget-page/budget-page.component';
-import { FoodListService } from './party-service/food-page.service';
 import { CreatepartyService } from './party-service/createparty.service';
+import { PartyDetailsService } from './party-service/party-details.service';
+import { FoodPageService } from './party-service/food-page.service';
+import { GuestPageComponent } from './guest-page/guest-page.component';
 
 
 @NgModule({
@@ -32,7 +34,8 @@ import { CreatepartyService } from './party-service/createparty.service';
     OverviewPageComponent,
     ShowErrorsComponent,
     LocationPageComponent,
-    BudgetPageComponent
+    BudgetPageComponent,
+    GuestPageComponent
   ],
   imports: [
     BrowserModule,
@@ -48,7 +51,7 @@ import { CreatepartyService } from './party-service/createparty.service';
       {path: 'login/partyDetail/:id/overview', component: OverviewPageComponent}
     ])
   ],
-  providers: [FoodListService,CreatepartyService],
+  providers: [PartyDetailsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

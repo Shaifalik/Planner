@@ -15,6 +15,7 @@ export class LocationPageComponent implements OnInit {
   private details: String;
   private eventLoc = '';
   private eventAdd = '';
+  isClickedOnce=false;
 
   constructor(private service: LocationPageService) {
   }
@@ -37,24 +38,14 @@ export class LocationPageComponent implements OnInit {
     this.locationList.splice(index, 1);
   }
 
-  // Function to submit locations object to backend
-  onSubmit() {
-    this.service.postLocationList(this.locationList).subscribe((response) => {
-    this.details = response;
-    }
-    )
-  }
-
-  onEdit(){
+  onEditLocation(){
     this.details="";
   }
 
-  // Service extra to validate backend call
-  getResponse() {
-   this.service.getLocationDetails()
-  .subscribe(
-   response => this.details = response
-  );
-   }
+  // Function to submit locations object to backend
+  onLocationSubmit() {
+    this.service.saveLocationList(this.locationList);
+    this.isClickedOnce=true;
+  }
 
 }
