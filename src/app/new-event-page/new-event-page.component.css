@@ -6,14 +6,19 @@
     margin-right:1%;
 }
 
-.inner-form{
+.form-group{
 background-color:antiquewhite;
 border-bottom:1px solid #bfbfbf;
+float: left;
 }
     
-.inner-form-group{
+.inner-form{
 margin-top:2%;
 margin-right:2%;
 margin-bottom:2%;
+}
+
+.app-show-errors{
+    position: absolute;
 }
 

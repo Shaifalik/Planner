@@ -1,7 +1,7 @@
 import { Food } from "./food";
 import { Location } from "./location";
 import { Budget } from "./budget";
-import { Event } from '../party-pojo/event';
+import { Event } from '../pojos/event';
 import { Guest } from "./guest";
 
 export class EventDetails {

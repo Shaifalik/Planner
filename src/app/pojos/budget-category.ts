@@ -5,7 +5,13 @@ export class BudgetCategory {
     private _budgetCategoryId: number;
     private _budgetCategoryName: string;
     private _budgetCategoryAmount: number;
-    
+
+    constructor(_budgetCategoryId: number, _budgetCategoryName: string, _budgetCategoryAmount: number) {
+        this._budgetCategoryId = _budgetCategoryId;
+        this._budgetCategoryName = _budgetCategoryName;
+        this._budgetCategoryAmount = _budgetCategoryAmount;
+    }
+
     public get budgetCategoryId(): number {
         return this._budgetCategoryId;
     }
@@ -27,5 +33,5 @@ export class BudgetCategory {
         this._budgetCategoryAmount = value;
     }
 
-   
+
 }

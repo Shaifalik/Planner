@@ -1,15 +1,26 @@
 import { Injectable } from '@angular/core';
-import { Food } from '../party-pojo/food';
+import { Observable } from "rxjs/Observable";
+import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { EventDetails } from '../pojos/event-details';
 
 @Injectable()
-export class LoginPageService {
+export class EventListService {
   private events;
   private pageCount = 0;
 
-  constructor() {
+  constructor(private http: Http) {
+  }
+  getEvents(): Observable<Array<EventDetails>>  {
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    let options = new RequestOptions({ headers: headers });
+    return this.http.get('http://localhost:8081/rest/events',options)
+       .map((res:Response) =>{
+         return <Array<EventDetails>>(res.json())
+       });
   }
 
-  getEvents() {
+  getAllEvents() {
     return this.events = [
       {
         event_id: 1,

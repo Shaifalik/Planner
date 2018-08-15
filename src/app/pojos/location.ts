@@ -1,11 +1,8 @@
 export class Location {
     private _locationId: number;
-    private _eventLocation: String;
-    private _eventAddress: String;
 
-    constructor(eventLocation: String, eventAddress: String) {
-        this.eventLocation = eventLocation;
-        this.eventAddress = eventAddress;
+
+    constructor(private _eventLocation: String,private _eventAddress: String) {
     }
 
     public get locationId(): number {

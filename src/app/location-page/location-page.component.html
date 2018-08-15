@@ -4,55 +4,62 @@
     <div class="panel-group">
       <div class="panel panel-default panel-size">
         <div class="panel-heading clearfix">
-          <h5 class="panel-title pull-left">Event Location</h5>
+          <h5 class="panel-title pull-left">Venue Details</h5>
           <h5 class="panel-title pull-right">{{details}}</h5>
         </div>
 
         <div class="panel-body">
           <form #newLocationForm="ngForm" (ngSubmit)="onLocationSubmit()" class="ui form">
 
-            <button type="button" class="btn btn-primary btn-sm pull-right" [disabled]="!isClickedOnce" (click)="isClickedOnce = false">Edit</button>
-            <button type="submit" class="btn btn-primary btn-sm btn-space pull-right" [disabled]="locationList.length==0 || isClickedOnce"
-              >
-              Submit and Continue</button>
+            <button type="button" class="btn btn-primary btn-md pull-right" [disabled]="!isClickedOnce" (click)="isClickedOnce = false">Edit</button>
+            <button type="submit" class="btn btn-primary btn-md btn-space pull-right" [disabled]="locationList.length==0 || isClickedOnce">
+              Save</button>
             <fieldset [disabled]="isClickedOnce">
 
+              <div class="form-group col-md-10">
+                <label class="form-label" for="inputLocation"> Venue Location:</label>
+                <div class="input-group col-md-4">
+                  <input list="locationlist" id="inputLocation" type="text" class="form-control input-md" [(ngModel)]="model.eventLocation"
+                    name="eventLoc" placeholder="Add Location" #eventLoc="ngModel" required/>
+                  <datalist id="locationlist" *ngFor="let locData of storedLocationList;">
+                    <option>{{locData._eventLocation}}</option>
+                  </datalist>
+                </div>
+                <app-show-errors [control]="inputLocation"></app-show-errors>
 
-              <div class="col-md-8 inner-form" id="innerform">
-                <div class="col-md-4 inner-form-group">
-                  <input type="text" class="form-control input-sm" [(ngModel)]="eventLoc" name="eventLoc" placeholder="Add Location" required
-                  />
+                <div class="input-group col-md-3">
+                  <input type="text " id="inputAddress" class="form-control input-md " [(ngModel)]="model.eventAddress " name="eventAdd" #eventAdd="ngModel"
+                    placeholder="Add Address " required/>
+                  <div class="input-group-btn">
+                    <button class="btn btn-primary btn-md " type="button" (click)="addNewLocation()">Add Venue</button>
+                  </div>
                 </div>
-                <div class="col-md-4 inner-form-group">
-                  <input type="text" class="form-control input-sm" [(ngModel)]="eventAdd" name="eventAdd" placeholder="Add Address" required
-                  />
-                </div>
-                <div class="col-md-2 inner-form-group">
-                  <button class="btn btn-primary btn-sm" type="button" (click)="addNewLocation()" [class.disabled]="isClickedOnce">Add Location</button>
+                <app-show-errors [control]="inputAddress"></app-show-errors>
+
+                <div class="col-md-8 loc-list-group">
+                  <table class="table Location" *ngIf="locationList?.length ">
+                    <thead>
+                      <tr>
+                        <th>Location</th>
+                        <th>Address</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let loc of locationList; let ind=index ">
+                        <td>{{loc.eventLocation}}</td>
+                        <td>{{loc.eventAddress}}</td>
+                        <td class="enable-remove-icon" *ngIf="!isClickedOnce">
+                          <a style="cursor: pointer" (click)="removeLocation(ind)">Remove</a>
+                        </td>
+                        <td class="disable-remove-icon" *ngIf="isClickedOnce">
+                          <a style="cursor: pointer" (click)="removeLocation(ind)">Remove</a>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
               </div>
             </fieldset>
-
-              <div class="col-md-8 inner-list">
-                <table class="table Location" *ngIf="locationList?.length">
-                  <thead>
-                    <tr>
-                      <th>Location</th>
-                      <th>Address</th>
-                      <th>Option</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr *ngFor="let location of locationList; let ind=index">
-                      <td>{{location.eventLocation}}</td>
-                      <td>{{location.eventAddress}}</td>
-                      <td>
-                        <span class="tag-cross" (click)="removeLocation(ind)">X</span>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
           </form>
         </div>
       </div>

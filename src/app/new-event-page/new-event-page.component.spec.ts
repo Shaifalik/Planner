@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CreatepartyPageComponent } from './createparty-page.component';
+import { NewEventPageComponent } from './new-event-page.component';
 
-describe('CreatepartyPageComponent', () => {
-  let component: CreatepartyPageComponent;
-  let fixture: ComponentFixture<CreatepartyPageComponent>;
+describe('NewEventPageComponent', () => {
+  let component: NewEventPageComponent;
+  let fixture: ComponentFixture<NewEventPageComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CreatepartyPageComponent ]
+      declarations: [ NewEventPageComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CreatepartyPageComponent);
+    fixture = TestBed.createComponent(NewEventPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

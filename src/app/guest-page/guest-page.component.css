@@ -6,23 +6,21 @@
     margin-right:1%;
 }
 
-.inner-form{
-background-color:antiquewhite;
-border-bottom:1px solid #bfbfbf;
+.form-group{
+    padding-top: 12px;
+    padding-bottom: 12px;
+    background-color:antiquewhite;
+    border-bottom:1px solid #bfbfbf;
+}
+    
+.guest-list-group{
+    background-color:antiquewhite;
+    margin-bottom: 2%;
+}
+    
+.disable-remove-icon{
+    pointer-events:none;
 }
 
-.inner-form-button-group{
-    margin-top:4%;
-}
 
-.inner-form-group{
-margin-top:2%;
-margin-right:2%;
-margin-bottom:2%;
-}
-
-.inner-list{
-background-color:antiquewhite;
-margin-bottom: 2%;
-}
 

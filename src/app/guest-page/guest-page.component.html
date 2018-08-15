@@ -9,37 +9,41 @@
       <div class="panel-body">
         <form #GuestListForm="ngForm" (ngSubmit)="onSubmit(GuestListForm)">
 
-          <button type="button" class="btn btn-primary btn-sm pull-right" (click)="isClickedOnce= false" [disabled]="!isClickedOnce">Edit</button>
-          <button type="submit" class="btn btn-primary btn-sm pull-right" [disabled]="guestList.length==0||isClickedOnce">
-            Save & Continue</button>
+          <button type="button" class="btn btn-primary btn-md pull-right" (click)="isClickedOnce= false" [disabled]="!isClickedOnce">Edit</button>
+          <button type="submit" class="btn btn-primary btn-md btn-space pull-right" [disabled]="guestList.length==0||isClickedOnce">
+            Save</button>
           <fieldset [disabled]="isClickedOnce">
 
-            <div class="col-md-8 inner-form" id="innerform">
-              <div class="col-md-6 inner-form-group">
-                <label class="form-label" for="inputGuestList">Guest Item :</label>
-                <input id="inputGuestList" type="text" class="form-control input-sm" name="guestEmailId" [(ngModel)]="model.guestEmailId"
+            <div class="form-group col-md-10">
+              <label class="form-label" for="inputGuestList"> GuestEmailIds:</label>
+              <div class="input-group col-md-7">
+                <input list="GuestList" id="inputGuestList" type="text" class="form-control input-md" name="guestEmailId" [(ngModel)]="model.guestEmailId"
                   placeholder="Guest EmailId Please" #guestEmailId="ngModel" required/>
-                <app-show-errors [control]="guestEmailId"></app-show-errors>
+                <datalist id="GuestList" *ngFor="let guest of storedGuestList;">
+                  <option>{{guest._guestEmailId}}</option>
+                </datalist>
+                <div class="input-group-btn">
+                  <button class="btn btn-primary btn-md" type="button" (click)="addNewGuest()">Add Guest</button>
+                </div>
               </div>
-
-              <div class="col-md-2 inner-form-button-group">
-                <button class="btn btn-primary btn-md" type="button" (click)="addNewGuest()">Add Guest</button>
-              </div>
+              <app-show-errors [control]="guestEmailId"></app-show-errors>
 
 
-              <div class="col-md-8 inner-list">
+              <div class="col-md-8 guest-list-group">
                 <table class="table GuestEmailIds" *ngIf="guestList?.length">
                   <thead>
                     <tr>
                       <th>GuestList</th>
-                      <th>Delete</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr *ngFor="let guest of guestList; let ind=index">
                       <td>{{guest.guestEmailId}}</td>
-                      <td>
-                        <span class="tag-cross" (click)="removeGuest(ind)">X</span>
+                      <td class="enable-remove-icon" *ngIf="!isClickedOnce">
+                        <a style="cursor: pointer" (click)="removeGuest(ind)">Remove</a>
+                      </td>
+                      <td class="disable-remove-icon" *ngIf="isClickedOnce">
+                        <a style="cursor: pointer" (click)="removeGuest(ind)">Remove</a>
                       </td>
                     </tr>
                   </tbody>

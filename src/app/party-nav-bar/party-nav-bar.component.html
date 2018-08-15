@@ -1,9 +1,10 @@
 <div class="container-fluid party-nav-bar" id="party-nav-bar">
 
   <form #eventForm="ngForm" (ngSubmit)="onSubmit()" class="ui form">
-    <button type="submit" class="btn btn-primary btn-md pull-right">Submit Details</button>
-    <h4 class="pull-left">Create party</h4>
-
+    <div class="col-md-12 header-area">
+    <button class="col-md-2 area"  type="submit" id="main-page-button" class="btn btn-primary btn-md pull-right">Submit Details</button>
+    <button class="col-md-2 area" type="button" id="main-page-button" class="btn btn-primary btn-md pull-left" (click)=onBackButton()>Go Back</button>
+</div>
     <div class="btn-group" id="page-header">
       <button type="button" style="width:20%" class="btn btn-primary segmentedButton" (click)="visible=2">New Party</button>
       <button type="button" style="width:20%" class="btn btn-primary segmentedButton" (click)="visible=3">Food and Beverages</button>
@@ -13,10 +14,10 @@
     </div>
 
     <div *ngIf="visible === 2">
-      <app-createparty-page></app-createparty-page>
+      <app-createparty-page (changeTab)=onChangeTab($event)></app-createparty-page>
     </div>
     <div *ngIf="visible === 3">
-      <app-food-page></app-food-page>
+      <app-food-page (changeTab)=onChangeTab($event)></app-food-page>
     </div>
 
     <div *ngIf="visible === 4">

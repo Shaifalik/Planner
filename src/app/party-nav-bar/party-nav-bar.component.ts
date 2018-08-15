@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { PartyDetailsService } from '../party-service/party-details.service';
-import { EventDetails } from '../party-pojo/event-details';
+import { PartyDetailsService } from '../services/party-details.service';
+import { EventDetails } from '../pojos/event-details';
 import { NgForm } from '@angular/forms';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-party-nav-bar',
@@ -12,17 +13,15 @@ import { NgForm } from '@angular/forms';
 export class PartyNavBarComponent implements OnInit {
   data: string;
   id: number;
-  visible: any;
+  visible: number;
   private sub: any;
   eventDetailsObject: EventDetails;
 
-  constructor(private route: ActivatedRoute, private service: PartyDetailsService,private router: Router) { }
+  constructor(private route: ActivatedRoute, private service: PartyDetailsService,private router: Router,private location: Location) { }
 
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
-      this.id = +params['id']; // (+) converts string 'id' to a number
-
-      // In a real app: dispatch action to load the details here.
+      this.id = +params['id']; 
     });
     this.visible = 2;
     this.service.cast.subscribe(eventDetails => this.eventDetailsObject = eventDetails);
@@ -31,10 +30,20 @@ export class PartyNavBarComponent implements OnInit {
   onSubmit() {
     this.service.postEventDetailData(this.eventDetailsObject).subscribe((response) => {
       this.data = response;
+      alert(this.data);
     })
-    //eventForm.reset();
-    console.log("submit");
     //this.router.navigateByUrl("/login");
   }
+
+  onChangeTab(event){
+    console.log(this.visible);
+    this.visible=event;
+  }
+
+  onBackButton(){
+    this.location.back();
+  }
+
+
 }
 

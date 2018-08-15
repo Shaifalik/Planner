@@ -1,0 +1,50 @@
+<div class="container-fluid createparty-page" id="createparty-page">
+
+  <div class="panel-group">
+    <div class="panel panel-default">
+      <div class="panel-heading clearfix">
+        <h5 class="panel-title pull-left">New Party</h5>
+      </div>
+
+      <div class="panel-body">
+        <form #newEventForm="ngForm" (ngSubmit)="onSubmit(newEventForm)">
+
+          <button type="button" class="btn btn-primary btn-md pull-right" (click)="isClickedOnce= false" [disabled]="!isClickedOnce">Edit</button>
+          <button type="submit" class="btn btn-primary btn-md btn-space pull-right" [disabled]="!newEventForm.form.valid || isClickedOnce">
+            Save</button>
+
+          <fieldset [disabled]="isClickedOnce">
+
+            <div class="form-group col-md-10">
+
+              <div class="col-md-5 inner-form">
+                <label class="form-label" for="inputEventName"> Event Name:</label>
+                <input id="inputEventName" type="text" class="form-control input-md" name="eventName" [(ngModel)]="model.eventName" placeholder="EventName please"
+                  #eventName="ngModel" required/>
+                <app-show-errors [control]="eventName"></app-show-errors>
+              </div>
+
+              <div class="col-md-4 inner-form">
+                <label class="form-label" for="inputEventDate">Event Date and Time: </label>
+                <input id="inputEventDesc" class="form-control input-md" type="datetime-local" [(ngModel)]="model.eventDate" name="eventDate" #eventDate="ngModel" required/>
+                <app-show-errors [control]="eventDate"></app-show-errors>
+              </div>
+
+              <div class="col-md-6 inner-form">
+                <label class="form-label" for="inputEventDesc"> Event Description:</label>
+                <textarea id="inputEventDesc" class="form-control input-md" [(ngModel)]="model.eventDesc" placeholder="Please specify some event description"
+                  name="eventDesc" #eventDesc="ngModel" minlength="5" maxlength="200" required>
+                </textarea>
+                <span class="error-block">
+                  <app-show-errors [control]="eventDesc"></app-show-errors>
+                </span>
+              </div>
+
+
+            </div>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

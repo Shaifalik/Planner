@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { NgForm } from '@angular/forms/src/directives/ng_form';
-import { Food } from '../party-pojo/food';
-import { FoodPageService } from '../party-service/food-page.service';
+import { Food } from '../pojos/food';
+import { FoodPageService } from '../services/food-page.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-food-page',
@@ -13,17 +14,35 @@ import { FoodPageService } from '../party-service/food-page.service';
 export class FoodPageComponent implements OnInit {
   private foodList: Array<Food>;
   model: Food = new Food("");
-  isClickedOnce=false;
+  isClickedOnce = false;
+  private storedFoodList: Array<Food>;
 
-  constructor(private service: FoodPageService) { }
+  @Output()
+  changeTab: EventEmitter<number> = new EventEmitter();
+
+  constructor(private service: FoodPageService, private router: Router) {
+  }
 
   ngOnInit(): void {
-    this.foodList = [];
+    this.foodList = this.service.getTemporaryFoodList();
+    if (this.foodList == undefined) {
+      this.foodList = [];
+    }
+    this.service.getAvailableFoodList().subscribe((result) => { this.storedFoodList = result; });
   }
 
   addNewFoodItem() {
     if (this.model.foodItem !== '') {
+      if(this.foodList.length>0){
+      for (var i = 0; i < this.foodList.length; i++) {
+        if (!this.foodList[i].foodItem.match(this.model.foodItem)) {
+          this.foodList.push(new Food(this.model.foodItem));
+        }
+      }
+    }
+    else{
       this.foodList.push(new Food(this.model.foodItem));
+    }
       this.model.foodItem = '';
     }
   }
@@ -34,7 +53,8 @@ export class FoodPageComponent implements OnInit {
 
   onSubmit(newFoodItemsForm: NgForm) {
     this.service.saveFoodList(this.foodList);
-    this.isClickedOnce=true;
+    this.isClickedOnce = true;
+    //this.changeTab.emit(4);
   }
 
 }

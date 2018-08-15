@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Expense } from './expense';
+import { BudgetCategory } from './budget-category';
 
 @Injectable()
 export class Budget {

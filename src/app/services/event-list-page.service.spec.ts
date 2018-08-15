@@ -1,15 +1,15 @@
 import { TestBed, inject } from '@angular/core/testing';
 
-import { LoginPageService } from './login-page.service';
+import { EventListService } from './event-list-page.service';
 
 describe('LoginPageService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [LoginPageService]
+      providers: [EventListService]
     });
   });
 
-  it('should be created', inject([LoginPageService], (service: LoginPageService) => {
+  it('should be created', inject([EventListService], (service: EventListService) => {
     expect(service).toBeTruthy();
   }));
 });

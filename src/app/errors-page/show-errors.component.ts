@@ -3,11 +3,7 @@ import { AbstractControlDirective, AbstractControl } from '@angular/forms';
 
 @Component({
   selector: 'app-show-errors',
-  template: `
-  <ul *ngIf="shouldShowErrors()">
-  <li style="color: red" *ngFor="let error of listOfErrors()">{{error}}</li>
-  </ul>
-  `
+  templateUrl: './show-errors.component.html'
 })
 export class ShowErrorsComponent {
 

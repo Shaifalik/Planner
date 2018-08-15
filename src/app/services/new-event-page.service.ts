@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Event } from '../party-pojo/event';
-import { EventDetails } from '../party-pojo/event-details';
+import { Event } from '../pojos/event';
+import { EventDetails } from '../pojos/event-details';
 import { PartyDetailsService } from './party-details.service';
 import { NgForm } from '@angular/forms';
 
 @Injectable()
-export class CreatepartyService {
+export class NewEventPageService {
   private eventDetailsObject: EventDetails;
   private newEvent: Event;
 
@@ -18,6 +18,10 @@ export class CreatepartyService {
     this.eventDetailsObject.setEvent(this.newEvent);
     this.service.editEventDetails(this.eventDetailsObject);
     console.log(this.eventDetailsObject);
+  }
+
+  getTempStoredEventData():Event{
+    return this.service.getStoredEventData();
   }
 
 }

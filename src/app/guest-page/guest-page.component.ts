@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Guest } from '../party-pojo/guest';
-import { GuestPageService } from '../party-service/guest-page.service';
+import { Guest } from '../pojos/guest';
+import { GuestPageService } from '../services/guest-page.service';
 
 @Component({
   selector: 'app-guest-page',
@@ -13,12 +13,18 @@ import { GuestPageService } from '../party-service/guest-page.service';
 export class GuestPageComponent implements OnInit {
   private guestList: Array<Guest>;
   model: Guest = new Guest("");
-  isClickedOnce=false;
+  isClickedOnce = false;
+  private storedGuestList: Array<Guest>;
 
   constructor(private service: GuestPageService) { }
 
   ngOnInit(): void {
-    this.guestList = [];
+    this.guestList = this.service.getTempStoredGuestList();
+    if (this.guestList == undefined) {
+      this.guestList = [];
+    }
+    // To display the available Guest List
+    this.service.getAvailableGuestList().subscribe((result) => { this.storedGuestList = result; });
   }
 
   addNewGuest() {
@@ -34,7 +40,7 @@ export class GuestPageComponent implements OnInit {
 
   onSubmit(GuestListForm: NgForm) {
     this.service.saveGuestList(this.guestList);
-    this.isClickedOnce=true;
+    this.isClickedOnce = true;
   }
 
 }

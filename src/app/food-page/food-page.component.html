@@ -1,50 +1,55 @@
 <div class="container-fluid food-page" id="food-page">
-
   <div class="panel-group">
     <div class="panel panel-default">
+
       <div class="panel-heading clearfix">
-        <h5 class="panel-title pull-left">Food & Bevearages</h5>
+        <h5 class="panel-title pull-left">Food Details</h5>
       </div>
 
       <div class="panel-body">
         <form #newFoodItemsForm="ngForm" (ngSubmit)="onSubmit(newFoodItemsForm)">
 
-          <button type="button" class="btn btn-primary btn-sm pull-right" (click)="isClickedOnce= false" [disabled]="!isClickedOnce">Edit</button>
-          <button type="submit" class="btn btn-primary btn-sm pull-right" [disabled]="foodList.length==0||isClickedOnce">
-            Save & Continue</button>
+          <button type="button" class="btn btn-primary btn-md pull-right" (click)="isClickedOnce= false" [disabled]="!isClickedOnce">Edit</button>
+          <button type="submit" class="btn btn-primary btn-md btn-space pull-right" [disabled]="foodList.length==0||isClickedOnce">
+            Save</button>
           <fieldset [disabled]="isClickedOnce">
 
-            <div class="col-md-8 inner-form" id="innerform">
-              <div class="col-md-6 inner-form-group">
-                <label class="form-label" for="inputFoodItem">Food Item :</label>
-                <input id="inputFoodItem" type="text" class="form-control input-sm" name="foodItem" [(ngModel)]="model.foodItem" placeholder="Item Name"
-                  #foodItem="ngModel" required/>
-                <app-show-errors [control]="foodItem"></app-show-errors>
+            <div class="form-group col-md-10">
+              <label class="form-label" for="inputFoodItem"> Food Item:</label>
+              <div class="input-group col-md-7">
+                <input list="FoodList" id="inputFoodItem" type="text" class="form-control input-md" name="foodItem" [(ngModel)]="model.foodItem"
+                  placeholder="Item Name" #foodItem="ngModel" required/>
+                <datalist id="FoodList" *ngFor="let foodData of storedFoodList;">
+                  <option>{{foodData._foodItem}}</option>
+                </datalist>
+                <div class="input-group-btn">
+                  <button class="btn btn-primary btn-md" type="button" (click)="addNewFoodItem()">Add Item</button>
+                </div>
               </div>
-
-              <div class="col-md-2 inner-form-button-group">
-                <button class="btn btn-primary btn-md" type="button" (click)="addNewFoodItem()">Add Item</button>
-              </div>
+              <app-show-errors [control]="foodItem"></app-show-errors>
 
 
-              <div class="col-md-8 inner-list">
+              <div class="col-md-8 food-list-group">
                 <table class="table foodItems" *ngIf="foodList?.length">
                   <thead>
                     <tr>
-                      <th>FoodItems</th>
-                      <th>Delete</th>
+                      <th>Added Items</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr *ngFor="let food of foodList; let ind=index">
                       <td>{{food.foodItem}}</td>
-                      <td>
-                        <span class="tag-cross" (click)="removeFoodItem(ind)">X</span>
+                      <td class="enable-remove-icon" *ngIf="!isClickedOnce">
+                      <a style="cursor: pointer" (click)="removeFoodItem(ind)">Remove</a>
+                      </td>
+                      <td class="disable-remove-icon" *ngIf="isClickedOnce">
+                          <a style="cursor: pointer" (click)="removeFoodItem(ind)">Remove</a>
                       </td>
                     </tr>
                   </tbody>
                 </table>
               </div>
+
             </div>
           </fieldset>
         </form>

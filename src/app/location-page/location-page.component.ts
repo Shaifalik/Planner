@@ -1,8 +1,6 @@
-import { NgForm } from '@angular/forms/src/directives/ng_form';
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { Location } from '../party-pojo/location';
-import { LocationPageService } from '../party-service/location-page.service';
+import { Location } from '../pojos/location';
+import { LocationPageService } from '../services/location-page.service';
 
 @Component({
   selector: 'app-location-page',
@@ -12,24 +10,27 @@ import { LocationPageService } from '../party-service/location-page.service';
 })
 export class LocationPageComponent implements OnInit {
   private locationList: Array<Location>;
-  private details: String;
-  private eventLoc = '';
-  private eventAdd = '';
-  isClickedOnce=false;
+  model: Location = new Location("", "");
+  isClickedOnce = false;
+  private storedLocationList: Array<Location>;
 
   constructor(private service: LocationPageService) {
   }
 
   ngOnInit() {
-    this.locationList = [];
+    this.locationList = this.service.getStoredTempLocationList();
+    if (this.locationList == undefined) {
+      this.locationList = [];
+    }
+    this.service.getAvailableLocationList().subscribe((result) => { this.storedLocationList = result; });
   }
 
   // Function to add locations object to LocationList on AddLocation Button
   addNewLocation() {
-    if (this.eventLoc !== '' && this.eventAdd !== '') {
-      this.locationList.push(new Location(this.eventLoc, this.eventAdd));
-      this.eventLoc = '';
-      this.eventAdd = '';
+    if (this.model.eventLocation !== '' && this.model.eventAddress !== '') {
+      this.locationList.push(new Location(this.model.eventLocation, this.model.eventAddress));
+      this.model.eventLocation = '';
+      this.model.eventAddress = '';
     }
   }
 
@@ -38,14 +39,10 @@ export class LocationPageComponent implements OnInit {
     this.locationList.splice(index, 1);
   }
 
-  onEditLocation(){
-    this.details="";
-  }
-
   // Function to submit locations object to backend
   onLocationSubmit() {
     this.service.saveLocationList(this.locationList);
-    this.isClickedOnce=true;
+    this.isClickedOnce = true;
   }
 
 }

@@ -16,13 +16,13 @@
                 </div>
 
                 <div class="panel-body" id="page-content">
-                    <div class="list-group" *ngFor="let event of events">
+                    <div class="list-group" *ngFor="let event of eventsData">
                         <div class="list-group-item list-group-item-info">
-                            <a href="#" routerLink="/login/partyDetail/{{event.event_id}}/overview">
-                                <h4 class="list-group-item-heading" id="event-name">{{event.event_name}}</h4>
+                            <a href="#" routerLink="/login/partyDetail/{{event._eventId}}/overview">
+                                <h4 class="list-group-item-heading" id="event-name">{{event._eventName}}</h4>
                             </a>
-                            <p class="list-group-item-text">{{event.event_date}}</p>
-                            <p class="list-group-item-text">{{event.event_description}}</p>
+                            <p class="list-group-item-text">{{event._eventDate}}</p>
+                            <p class="list-group-item-text">{{event._eventDescription}}</p>
                             <div class="list-group-item-heading" id="page-icons">
                                 <div class="list-group-icons">
                                     <a href="#" data-toggle="tooltip" title="To vote">

@@ -7,12 +7,20 @@
   white-space: nowrap;
 }
 
+#main-page-button{
+  margin:2px;
+}
 .main-header .header-button{
   margin-bottom:.5%;
 }
 
 .main-header .header-text{
   font:10%;
+}
+
+.paragraph{
+  text-align: center;
+  position: relative;
 }
 
 

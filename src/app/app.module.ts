@@ -8,17 +8,16 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { NavigatorBarComponent } from './navigator-bar/navigator-bar.component';
 import { HomePageComponent } from './home-page/home-page.component';
-import { LoginPageComponent } from './login-page/login-page.component';
-import { CreatepartyPageComponent } from './createparty-page/createparty-page.component';
+import { EventListComponent } from './event-list-page/event-list-page.component';
+import { NewEventPageComponent } from './new-event-page/new-event-page.component';
 import { PartyNavBarComponent } from './party-nav-bar/party-nav-bar.component';
 import { FoodPageComponent } from './food-page/food-page.component';
 import { OverviewPageComponent } from './overview-page/overview-page.component';
-import { ShowErrorsComponent } from './show-errors/show-errors.component';
+import { ShowErrorsComponent } from './errors-page/show-errors.component';
 import { LocationPageComponent } from './location-page/location-page.component';
 import { BudgetPageComponent } from './budget-page/budget-page.component';
-import { CreatepartyService } from './party-service/createparty.service';
-import { PartyDetailsService } from './party-service/party-details.service';
-import { FoodPageService } from './party-service/food-page.service';
+import { PartyDetailsService } from './services/party-details.service';
+import { FoodPageService } from './services/food-page.service';
 import { GuestPageComponent } from './guest-page/guest-page.component';
 
 
@@ -27,8 +26,8 @@ import { GuestPageComponent } from './guest-page/guest-page.component';
     AppComponent,
     NavigatorBarComponent,
     HomePageComponent,
-    LoginPageComponent,
-    CreatepartyPageComponent,
+    EventListComponent,
+    NewEventPageComponent,
     PartyNavBarComponent,
     FoodPageComponent,
     OverviewPageComponent,
@@ -45,13 +44,13 @@ import { GuestPageComponent } from './guest-page/guest-page.component';
     RouterModule.forRoot([
       {path: '', redirectTo: 'home',pathMatch: 'full'},
       {path: 'home', component: HomePageComponent},
-      {path: 'login', component: LoginPageComponent},
+      {path: 'login', component: EventListComponent},
       {path: 'login/newParty', component: PartyNavBarComponent},
       {path: 'login/partyDetail/:id', component: PartyNavBarComponent},
       {path: 'login/partyDetail/:id/overview', component: OverviewPageComponent}
     ])
   ],
-  providers: [PartyDetailsService],
+  providers: [PartyDetailsService,FoodPageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

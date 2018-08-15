@@ -1,38 +1,52 @@
 .panel-body{
     color: black;
+    background-color:antiquewhite;
+    margin-left:12px
+}
+
+.form{
+    float:left;
 }
 
 .btn-space{
     margin-right:1%;
 }
 
-.main-form-group{
-    display:inline-block;
-    margin-bottom:1%;
+.inner-form{
+    padding-bottom:12px;
 }
 
-.inner-form{
-background-color:antiquewhite;
-border-bottom:1px solid #bfbfbf;
-font-size: 12px;
+.form-group{
+    padding-top: 12px;
+    padding-bottom: 12px;
+    background-color:antiquewhite;
+    position: relative;
 }
+
+.form-group2-inner{
+    margin-top:2%;
+    margin-right:2%;
+    margin-bottom:2%;
+}
+
 
 .inner-form-button-group{
     margin-top:4%;
 }
 
-.inner-form-group{
-margin-top:2%;
-margin-right:2%;
-margin-bottom:2%;
+#foodItem{
+    width:120px;   
 }
 
 .inner-list{
-background-color:antiquewhite;
-margin-bottom: 2%;
+    background-color:antiquewhite;
+    margin-bottom: 2%;
 }
 
-span{
-    margin-top: 1% 1% 1% 1%;
+.hidden-form{
     float:right;
+}
+
+.disable-remove-icon{
+    pointer-events:none;
 }
