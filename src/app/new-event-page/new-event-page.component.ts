@@ -2,6 +2,7 @@ import { Component, Output, EventEmitter } from '@angular/core';
 import { Event } from '../pojos/event';
 import { NgForm } from '@angular/forms';
 import { NewEventPageService } from '../services/new-event-page.service';
+import { PartyDetailsService } from '../services/party-details.service';
 
 @Component({
   selector: 'app-createparty-page',
@@ -12,25 +13,32 @@ import { NewEventPageService } from '../services/new-event-page.service';
 
 export class NewEventPageComponent {
   model: Event = new Event("", "", null);
-  isClickedOnce = false;
+  isPageSaved: Boolean;
 
   @Output()
-  changeTab: EventEmitter<number> = new EventEmitter();
+  changeTab: EventEmitter<boolean> = new EventEmitter();
 
-  constructor(private service: NewEventPageService) { }
+  constructor(private service: NewEventPageService, private mainService: PartyDetailsService) {
+
+  }
 
   ngOnInit() {
-    this.model.eventDate = this.service.getTempStoredEventData().eventDate;
-    this.model.eventDesc = this.service.getTempStoredEventData().eventDesc;
-    this.model.eventName = this.service.getTempStoredEventData().eventName;
+    this.isPageSaved = this.mainService.isEventPageSaved;
+    this.model = this.service.getTempStoredEventData();
+  }
+
+  onEdit() {
+    this.mainService.isEventPageSaved = false;
+    this.isPageSaved = false;
+    this.changeTab.emit(false);
   }
 
   //On Page Save and Continue
   onSubmit(newEventForm: NgForm) {
     this.service.saveEventData(newEventForm);
-    this.isClickedOnce = true;
-    console.log("called");
-    this.changeTab.emit(3);
+    this.mainService.isEventPageSaved = true;
+    this.isPageSaved = true;
+    this.changeTab.emit(true);
   }
 
 }

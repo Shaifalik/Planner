@@ -8,6 +8,7 @@ import { NgForm } from '@angular/forms';
 export class NewEventPageService {
   private eventDetailsObject: EventDetails;
   private newEvent: Event;
+  isSaved: Boolean;
 
   constructor(private service: PartyDetailsService) {
     this.service.cast.subscribe(eventDetails => this.eventDetailsObject = eventDetails);
@@ -15,13 +16,21 @@ export class NewEventPageService {
 
   saveEventData(newEventForm: NgForm) {
     this.newEvent = newEventForm.value;
-    this.eventDetailsObject.setEvent(this.newEvent);
+    //this.eventDetailsObject.setEvent(this.newEvent);
     this.service.editEventDetails(this.eventDetailsObject);
     console.log(this.eventDetailsObject);
   }
 
-  getTempStoredEventData():Event{
+  getTempStoredEventData(): Event {
     return this.service.getStoredEventData();
+  }
+
+  setPageSaved(isSaved: Boolean) {
+    this.isSaved = isSaved;
+  }
+
+  getPageSaved() {
+    return this.isSaved;
   }
 
 }

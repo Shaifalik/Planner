@@ -9,24 +9,27 @@
       <div class="panel-body">
         <form #newFoodItemsForm="ngForm" (ngSubmit)="onSubmit(newFoodItemsForm)">
 
-          <button type="button" class="btn btn-primary btn-md pull-right" (click)="isClickedOnce= false" [disabled]="!isClickedOnce">Edit</button>
-          <button type="submit" class="btn btn-primary btn-md btn-space pull-right" [disabled]="foodList.length==0||isClickedOnce">
+          <button type="button" class="btn btn-primary btn-md pull-right" (click)="onEdit()" [disabled]="!isPageSaved">Edit</button>
+          <button type="submit" class="btn btn-primary btn-md btn-space pull-right" [disabled]="foodList.length==0||isPageSaved">
             Save</button>
-          <fieldset [disabled]="isClickedOnce">
+          <fieldset [disabled]="isPageSaved">
 
             <div class="form-group col-md-10">
               <label class="form-label" for="inputFoodItem"> Food Item:</label>
-              <div class="input-group col-md-7">
-                <input list="FoodList" id="inputFoodItem" type="text" class="form-control input-md" name="foodItem" [(ngModel)]="model.foodItem"
-                  placeholder="Item Name" #foodItem="ngModel" required/>
-                <datalist id="FoodList" *ngFor="let foodData of storedFoodList;">
-                  <option>{{foodData._foodItem}}</option>
-                </datalist>
-                <div class="input-group-btn">
-                  <button class="btn btn-primary btn-md" type="button" (click)="addNewFoodItem()">Add Item</button>
+              <div class="input-group-with-errors">
+                <div class="input-group col-md-7">
+                  <input list="FoodList" id="inputFoodItem" type="text" class="form-control input-md" name="foodItem" [(ngModel)]="model.foodItem"
+                    placeholder="Item Name" #foodItem="ngModel" [uniqueParam]="foodItemsList" pattern="[a-zA-Z]*" appUniqueValidator
+                    autocapitalize="word" />
+                  <datalist id="FoodList" *ngFor="let foodData of dbFoodList;">
+                    <option>{{foodData._foodItem}}</option>
+                  </datalist>
+                  <div class="input-group-btn">
+                    <button class="btn btn-primary btn-md" type="button" (click)="addNewFoodItem()" [disabled]="!newFoodItemsForm.valid">Add Item</button>
+                  </div>
                 </div>
+                <app-show-errors [control]="foodItem"></app-show-errors>
               </div>
-              <app-show-errors [control]="foodItem"></app-show-errors>
 
 
               <div class="col-md-8 food-list-group">
@@ -38,12 +41,12 @@
                   </thead>
                   <tbody>
                     <tr *ngFor="let food of foodList; let ind=index">
-                      <td>{{food.foodItem}}</td>
-                      <td class="enable-remove-icon" *ngIf="!isClickedOnce">
-                      <a style="cursor: pointer" (click)="removeFoodItem(ind)">Remove</a>
+                      <td>{{food._foodItem}}</td>
+                      <td class="enable-remove-icon" *ngIf="!isPageSaved">
+                        <a style="cursor: pointer" (click)="removeFoodItem(ind)">Remove</a>
                       </td>
-                      <td class="disable-remove-icon" *ngIf="isClickedOnce">
-                          <a style="cursor: pointer" (click)="removeFoodItem(ind)">Remove</a>
+                      <td class="disable-remove-icon" *ngIf="isPageSaved">
+                        <a style="cursor: pointer" (click)="removeFoodItem(ind)">Remove</a>
                       </td>
                     </tr>
                   </tbody>

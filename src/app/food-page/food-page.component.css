@@ -13,6 +13,10 @@ background-color:antiquewhite;
 border-bottom:1px solid #bfbfbf;
 }
 
+.input-group-with-errors{
+position: relative;
+}
+
 .food-list-group{
 margin-bottom: 2%;
 }

@@ -18,42 +18,29 @@
                 <div class="panel-body" id="page-content">
                     <div class="list-group" *ngFor="let event of eventsData">
                         <div class="list-group-item list-group-item-info">
-                            <a href="#" routerLink="/login/partyDetail/{{event._eventId}}/overview">
+                            <a href="#" routerLink="eventDetails/{{event._eventId}}">
                                 <h4 class="list-group-item-heading" id="event-name">{{event._eventName}}</h4>
                             </a>
                             <p class="list-group-item-text">{{event._eventDate}}</p>
                             <p class="list-group-item-text">{{event._eventDescription}}</p>
                             <div class="list-group-item-heading" id="page-icons">
                                 <div class="list-group-icons">
-                                    <a href="#" data-toggle="tooltip" title="To vote">
-                                        <i class="glyphicon glyphicon-thumbs-up"></i>
+                                    <a href="#" data-toggle="tooltip" title="To Mail" (click)="onEmailIcon(event._eventId)">
+                                        <i class="glyphicon glyphicon-envelope"></i>
                                     </a>
-                                    <a href="#" data-toggle="tooltip" title="To edit">
+                                    <a href="#" data-toggle="tooltip" title="To edit" routerLink="updateEventCreation/{{event._eventId}}">
                                         <i class="glyphicon glyphicon-file"></i>
                                     </a>
                                     <a href="#" data-toggle="tooltip" title="To delete">
                                         <i class="glyphicon glyphicon-remove"></i>
                                     </a>
+
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
-                <!-- <div class="text-center">
-                    <div class="pagination" id="page-footer">
-                        <li class="page-item" *ngFor="let n of pageCount">
-                            <a class="page-link" href="#">{{n}}</a>
-                        </li>
-                    </div>
-                </div> -->
             </div>
         </div>
     </div>
 </div>
-
-<script>
-    $(document).ready(function () {
-        $('[data-toggle="tooltip"]').tooltip();
-    });
-</script>

@@ -5,14 +5,14 @@ import { Event } from '../pojos/event';
 import { Guest } from "./guest";
 
 export class EventDetails {
-    private _eventId: number;
-    private _eventName: string;
-    private _eventDescription: string;
-    private _eventDate: Date;
-    private _foodList: Array<Food>;
-    private _locationList: Array<Location>;
-    private _guestList: Array<Guest>;
-    private _budget: Budget;
+    public _eventId: number;
+    public _eventName: string;
+    public _eventDescription: string;
+    public _eventDate: Date;
+    public _foodList: Array<Food>;
+    public _locationList: Array<Location>;
+    public _guestList: Array<Guest>;
+    public _budget: Budget;
 
     public setEvent(event: Event) {
         this.eventName = event.eventName;

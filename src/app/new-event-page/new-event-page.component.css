@@ -18,7 +18,8 @@ margin-right:2%;
 margin-bottom:2%;
 }
 
-.app-show-errors{
-    position: absolute;
-}
+.input-group-with-errors{
+    position: relative;
+ }
+
 

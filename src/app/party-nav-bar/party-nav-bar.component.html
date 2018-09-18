@@ -2,9 +2,9 @@
 
   <form #eventForm="ngForm" (ngSubmit)="onSubmit()" class="ui form">
     <div class="col-md-12 header-area">
-    <button class="col-md-2 area"  type="submit" id="main-page-button" class="btn btn-primary btn-md pull-right">Submit Details</button>
-    <button class="col-md-2 area" type="button" id="main-page-button" class="btn btn-primary btn-md pull-left" (click)=onBackButton()>Go Back</button>
-</div>
+      <button class="col-md-2 area" type="submit" id="main-page-button" class="btn btn-primary btn-md pull-right" [disabled]="enabledSubmitButton!=5">Submit Details</button>
+      <button class="col-md-2 area" type="button" id="main-page-button" class="btn btn-primary btn-md pull-left" (click)=onBackButton()>Go Back</button>
+    </div>
     <div class="btn-group" id="page-header">
       <button type="button" style="width:20%" class="btn btn-primary segmentedButton" (click)="visible=2">New Party</button>
       <button type="button" style="width:20%" class="btn btn-primary segmentedButton" (click)="visible=3">Food and Beverages</button>
@@ -21,15 +21,15 @@
     </div>
 
     <div *ngIf="visible === 4">
-      <app-guest-page></app-guest-page>
+      <app-guest-page (changeTab)=onChangeTab($event)></app-guest-page>
     </div>
 
     <div *ngIf="visible === 5">
-      <app-location-page></app-location-page>
+      <app-location-page (changeTab)=onChangeTab($event) ></app-location-page>
     </div>
 
     <div *ngIf="visible === 6">
-      <app-budget-page></app-budget-page>
+      <app-budget-page (changeTab)=onChangeTab($event) (onSaveCategory)=setBudgetCategory($event)></app-budget-page>
     </div>
   </form>
 </div>

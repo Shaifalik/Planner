@@ -13,11 +13,11 @@ import { Food } from '../pojos/food';
 @Injectable()
 export class BudgetPageService {
   private eventDetailsObject: EventDetails;
-  private budgetCategory: Array<BudgetCategory>;
   private headers = new Headers();
-  private foodList: Array<Food>;
+  foodList: Food[];
+  foodItemsList: string[] = [];
 
-  constructor(private service: PartyDetailsService, private foodService: FoodPageService, private http: Http) {
+  constructor(private service: PartyDetailsService, private http: Http) {
     this.service.cast.subscribe(eventDetails => this.eventDetailsObject = eventDetails);
   }
 
@@ -43,7 +43,6 @@ export class BudgetPageService {
   saveBudget(budget: Budget) {
     this.eventDetailsObject.budget = budget;
     this.service.editEventDetails(this.eventDetailsObject);
-    console.log(this.eventDetailsObject);
   }
 
   // Method to get all Budget Categories defined in Db
@@ -58,18 +57,22 @@ export class BudgetPageService {
       });
   }
 
-  //Update the data of Budget Category table
-  updateBudgetCategoryData(budgetCategory: BudgetCategory): Observable<number> {
-    this.headers.append('Content-Type', 'application/json');
-    let options = new RequestOptions({ headers: this.headers });
-    return this.http.post('http://localhost:8081/rest/updateBudgetCategoryData', JSON.stringify(budgetCategory))
-      .map((response: Response) => {
-        return response.status;
-      });
+  getEventFoodItems(): Array<Food> {
+    return this.service.getStoredFoodList();
   }
 
-  getEventFoodItems(): Array<Food> {
-    return this.foodService.getEventFoodList();
+  getFoodItemsList(): string[] {
+    this.foodList = this.service.getStoredFoodList();
+    if (this.foodList != undefined) {
+      for (let food of this.foodList) {
+        this.foodItemsList.push(food.foodItem);
+      }
+    }
+    return this.foodItemsList;
+  }
+
+  getStoredEventBudget():Budget{
+    return this.service.getStoredBudgetList();
   }
 
 }

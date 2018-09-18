@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import {HttpModule} from '@angular/http';
+import { HttpModule } from '@angular/http';
 import { NgDatepickerModule } from 'ng2-datepicker';
 
 import { FormsModule } from '@angular/forms';
@@ -12,13 +12,14 @@ import { EventListComponent } from './event-list-page/event-list-page.component'
 import { NewEventPageComponent } from './new-event-page/new-event-page.component';
 import { PartyNavBarComponent } from './party-nav-bar/party-nav-bar.component';
 import { FoodPageComponent } from './food-page/food-page.component';
-import { OverviewPageComponent } from './overview-page/overview-page.component';
-import { ShowErrorsComponent } from './errors-page/show-errors.component';
+import { ShowErrorsComponent } from './validators/errors-page/show-errors.component';
 import { LocationPageComponent } from './location-page/location-page.component';
 import { BudgetPageComponent } from './budget-page/budget-page.component';
 import { PartyDetailsService } from './services/party-details.service';
-import { FoodPageService } from './services/food-page.service';
 import { GuestPageComponent } from './guest-page/guest-page.component';
+import { UniqueValidatorDirective } from './validators/unique-validator.directive';
+import { EventDetailsPageComponent } from './event-details-page/event-details-page.component';
+import { OverviewPageService } from './services/overview-page.service';
 
 
 @NgModule({
@@ -30,11 +31,12 @@ import { GuestPageComponent } from './guest-page/guest-page.component';
     NewEventPageComponent,
     PartyNavBarComponent,
     FoodPageComponent,
-    OverviewPageComponent,
     ShowErrorsComponent,
     LocationPageComponent,
     BudgetPageComponent,
-    GuestPageComponent
+    GuestPageComponent,
+    UniqueValidatorDirective,
+    EventDetailsPageComponent
   ],
   imports: [
     BrowserModule,
@@ -42,15 +44,15 @@ import { GuestPageComponent } from './guest-page/guest-page.component';
     HttpModule,
     NgDatepickerModule,
     RouterModule.forRoot([
-      {path: '', redirectTo: 'home',pathMatch: 'full'},
-      {path: 'home', component: HomePageComponent},
-      {path: 'login', component: EventListComponent},
-      {path: 'login/newParty', component: PartyNavBarComponent},
-      {path: 'login/partyDetail/:id', component: PartyNavBarComponent},
-      {path: 'login/partyDetail/:id/overview', component: OverviewPageComponent}
+      { path: '', redirectTo: 'eventplanner/home', pathMatch: 'full' },
+      { path: 'eventplanner/home', component: HomePageComponent },
+      { path: 'eventplanner/eventsList', component: EventListComponent },
+      { path: 'eventplanner/newEventCreation', component: PartyNavBarComponent },
+      { path: 'eventplanner/eventsList/updateEventCreation/:id', component: PartyNavBarComponent },
+      { path: 'eventplanner/eventsList/eventDetails/:id', component: EventDetailsPageComponent },
     ])
   ],
-  providers: [PartyDetailsService,FoodPageService],
+  providers: [PartyDetailsService,OverviewPageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

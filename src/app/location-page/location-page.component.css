@@ -6,6 +6,10 @@
     margin-right:1%;
 }
 
+.input-group-with-errors{
+    position: relative;
+ }
+
 .form-group{
     padding-top: 12px;
     padding-bottom: 12px;

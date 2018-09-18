@@ -12,14 +12,14 @@ export class OverviewPageService {
 
   constructor(private http: Http) {
   }
-  getEventById(id): Observable<Array<EventDetails>> {
+  getEventById(id): Observable<EventDetails> {
     id = parseInt(id);
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
     let options = new RequestOptions({ headers: headers });
     return this.http.get('http://localhost:8081/rest/event/' + id, options)
       .map((res: Response) => {
-        return <Array<EventDetails>>(res.json())
+        return <EventDetails>(res.json())
       });
   }
 

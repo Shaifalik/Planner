@@ -1,0 +1,22 @@
+.panel-body{
+    background-color:#5bc0de;
+}
+
+.page-content{
+    text-align: left;
+    float: left;
+
+    color:black;
+}
+
+.li{
+    float: left;
+}
+
+.event-body{
+    padding: 5px;
+}
+
+.footer{
+    padding-bottom: 5px;
+}

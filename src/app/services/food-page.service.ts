@@ -13,16 +13,16 @@ export class FoodPageService {
     this.service.cast.subscribe(eventDetails => this.eventDetailsObject = eventDetails);
   }
 
-  saveFoodList(foodList: Array<Food>) {
-    this.eventDetailsObject.foodList = foodList;
-    this.service.editEventDetails(this.eventDetailsObject);
-    console.log(this.eventDetailsObject);
-  }
-
-  getTemporaryFoodList(): Array<Food> {
+  getStoredList(){
     return this.service.getStoredFoodList();
   }
 
+  saveFoodList(foodList: Array<Food>) {
+    this.eventDetailsObject.foodList = foodList;
+    this.service.editEventDetails(this.eventDetailsObject);
+  }
+
+  //function to fetch the food items stored in database
   getAvailableFoodList(): Observable<Array<Food>> {
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
@@ -35,7 +35,4 @@ export class FoodPageService {
       });
   }
 
-  getEventFoodList(): Array<Food> {
-    return this.eventDetailsObject.foodList
-  }
 }

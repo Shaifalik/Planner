@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { EventListService } from '../services/event-list-page.service';
 import { EventDetails } from '../pojos/event-details';
+import { OverviewPageService } from '../services/overview-page.service';
 
 @Component({
   selector: 'app-login-page',
@@ -12,21 +13,32 @@ import { EventDetails } from '../pojos/event-details';
 export class EventListComponent implements OnInit {
   private eventsData: Array<EventDetails>;
   private pageCount;
+  private sub: any;
+  private id:number;
+  eventGuestList: any;
+  status: any;
 
-  constructor(service:EventListService,private router: Router) { 
-    service.getEvents().subscribe((result) => { this.eventsData = result; });
-    console.log(this.eventsData);
-    //this.pageCount = service.getPaginationCount(this.events);
+  constructor(private service:EventListService,private router: Router) { 
   }
+
+  ngOnInit(){}
   
   createPageCountArray(){
     //this.pageCount=Array(pageCount).fill().map((x,i)=>i);
   }
-
-  ngOnInit() {
-  }
   
   redirectToCreateParty() {
-    this.router.navigateByUrl('/login/newParty');
+    this.router.navigateByUrl('eventplanner/newEventCreation');
+  }
+
+
+  onEmailIcon(id:number){
+    for(let event of this.eventsData){
+      if(event._eventId===this.id){
+        this.eventGuestList=event._guestList;
+      }
+    }
+    this.service.sendEmailtoGuestList(this.eventGuestList).subscribe(result=>this.status=result);
+    console.log(this.status);
   }
 }

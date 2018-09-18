@@ -1,0 +1,51 @@
+<div class="container-fluid">
+  <div class="event-details-page" id="event-details-page">
+    <div class="panel-group">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h1 class="panel-title">Event Overview:{{eventData._eventName}}</h1>
+        </div>
+        <div class="panel-body col-md-12">
+          <div class="page-content col-md-8">
+
+            <div class="event-body">
+              <div class="panel panel-success">
+                <div class="panel-heading">{{eventData._eventName}} </div>
+                <div class="panel-body">
+                  <div>Event Data: {{eventData._eventDate}}</div>
+                  <div>
+                    <p>{{eventData._eventDescription}}</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="panel panel-success">
+                <div class="panel-heading">Beverages Options</div>
+                <div class="panel-body">
+                  <ul *ngFor="let food of eventData._foodList">
+                    <li>{{food._foodItem}}</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="panel panel-success">
+                <div class="panel-heading">Venue Options</div>
+                <div class="panel-body">
+                  <ul *ngFor="let loc of eventData._locationList">
+                    <li>{{loc._eventLocation}}</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="footer col-md-3">
+              <button type="button" class="btn btn-default" (click)="onBackButton()">Go Back</button>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+              <div class="imgAbt">
+                  <img src="../../assets/images/event-details.jpg" width="350" height="400">
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>

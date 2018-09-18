@@ -16,12 +16,6 @@ export class GuestPageService {
   saveGuestList(guestList: Array<Guest>) {
     this.eventDetailsObject.guestList = guestList;
     this.service.editEventDetails(this.eventDetailsObject);
-    console.log(this.eventDetailsObject);
-  }
-
-  // function to display the temp guest list on screen
-  getTempStoredGuestList(): Array<Guest> {
-    return this.service.getStoredGuestList();
   }
 
   getAvailableGuestList():Observable<Array<Guest>>{

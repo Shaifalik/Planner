@@ -1,0 +1,4 @@
+<div class="show-errors alert alert-danger" style="color:red; position:absolute; right:140px; top:20px; transform: translateY(-50%)"
+    *ngIf="shouldShowErrors()">
+    <div *ngFor="let error of errorList">{{error}}</div>
+</div>
