@@ -16,7 +16,7 @@ export class NewEventPageService {
 
   saveEventData(newEventForm: NgForm) {
     this.newEvent = newEventForm.value;
-    //this.eventDetailsObject.setEvent(this.newEvent);
+    this.eventDetailsObject.setEvent(this.newEvent);
     this.service.editEventDetails(this.eventDetailsObject);
     console.log(this.eventDetailsObject);
   }

@@ -13,10 +13,12 @@ import { PartyDetailsService } from '../services/party-details.service';
 
 export class GuestPageComponent implements OnInit {
   private guestList: Array<Guest>;
+  // Used for Unique Param Validators
+  private guestEmailIdsList: Array<String>;
   private model: Guest = new Guest("");
   private isPageSaved: Boolean;
   private storedGuestList: Array<Guest>;
-  private ItemFieldIsEmpty: boolean;
+  allowValidation: boolean;
 
   @Output()
   changeTab: EventEmitter<boolean> = new EventEmitter();
@@ -30,22 +32,28 @@ export class GuestPageComponent implements OnInit {
     if (this.guestList == undefined) {
       this.guestList = [];
     }
+    if (this.guestEmailIdsList == undefined) {
+      this.guestEmailIdsList = [];
+    }
     // To show Drop down list of GuestList
     this.service.getAvailableGuestList().subscribe((result) => { this.storedGuestList = result; });
   }
 
-  addNewGuest() {
-    this.ItemFieldIsEmpty = true;
-    if (this.model.guestEmailId !== '') {
+  addNewGuest(GuestListForm:NgForm) {
+    this.allowValidation = true;
+    if (this.model.guestEmailId !== '' && GuestListForm.valid) {
       this.model.guestEmailId = this.model.guestEmailId.toLowerCase();
       this.guestList.push(new Guest(this.model.guestEmailId));
+      this.guestEmailIdsList.push(this.model.guestEmailId);
       this.model.guestEmailId = '';
-      this.ItemFieldIsEmpty = false;
+      this.allowValidation = false;
     }
   }
 
-  removeGuest(index: number) {
+  removeGuest(index: number,guestListForm:NgForm) {
     this.guestList.splice(index, 1);
+    this.guestEmailIdsList.splice(index,1);
+    guestListForm.reset();
   }
 
   onEdit() {

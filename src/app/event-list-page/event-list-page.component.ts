@@ -21,7 +21,9 @@ export class EventListComponent implements OnInit {
   constructor(private service:EventListService,private router: Router) { 
   }
 
-  ngOnInit(){}
+  ngOnInit(){
+    this.service.getEvents().subscribe((result) => { this.eventsData = result; });
+  }
   
   createPageCountArray(){
     //this.pageCount=Array(pageCount).fill().map((x,i)=>i);
@@ -34,11 +36,13 @@ export class EventListComponent implements OnInit {
 
   onEmailIcon(id:number){
     for(let event of this.eventsData){
-      if(event._eventId===this.id){
+      if(event._eventId===id){
         this.eventGuestList=event._guestList;
       }
     }
-    this.service.sendEmailtoGuestList(this.eventGuestList).subscribe(result=>this.status=result);
-    console.log(this.status);
+    this.service.sendEmailtoGuestList(this.eventGuestList).subscribe((result)=>{
+      this.status=result;
+      alert(this.status);
+    });
   }
 }

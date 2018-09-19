@@ -19,8 +19,8 @@
               <div class="input-group-with-errors">
                 <div class="input-group col-md-7">
                   <input list="FoodList" id="inputFoodItem" type="text" class="form-control input-md" name="foodItem" [(ngModel)]="model.foodItem"
-                    placeholder="Item Name" #foodItem="ngModel" [uniqueParam]="foodItemsList" pattern="[a-zA-Z]*" appUniqueValidator
-                    autocapitalize="word" />
+                    placeholder="Item Name" #foodItem="ngModel" pattern="[a-zA-Z]*" autocapitalize="word" [uniqueParam]="foodItemsList"
+                    appUniqueValidator required/>
                   <datalist id="FoodList" *ngFor="let foodData of dbFoodList;">
                     <option>{{foodData._foodItem}}</option>
                   </datalist>

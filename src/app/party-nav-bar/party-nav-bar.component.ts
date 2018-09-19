@@ -39,13 +39,18 @@ export class PartyNavBarComponent implements OnInit {
   }
 
   onSubmit() {
-    this.service.postEventDetailData(this.eventDetailsObject).subscribe((response) => {
-      this.data = response;
-      alert(this.data);
-    })
+    this.service.postEventDetailData(this.eventDetailsObject).subscribe(
+      suc => {
+        this.data = suc;
+        this.router.navigateByUrl("/eventplanner/eventsList");
+      },
+      err => {
+        this.data = err;
+        alert(this.data);
+      }
+    );
     this.service.updateBudgetCategoryData(this.category).subscribe((response) => {
     })
-    this.router.navigateByUrl("/login");
   }
 
   onChangeTab(event) {

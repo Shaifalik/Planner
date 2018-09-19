@@ -25,13 +25,13 @@
                             <p class="list-group-item-text">{{event._eventDescription}}</p>
                             <div class="list-group-item-heading" id="page-icons">
                                 <div class="list-group-icons">
-                                    <a href="#" data-toggle="tooltip" title="To Mail" (click)="onEmailIcon(event._eventId)">
+                                    <a data-toggle="tooltip" title="To Mail" (click)="onEmailIcon(event._eventId)">
                                         <i class="glyphicon glyphicon-envelope"></i>
                                     </a>
-                                    <a href="#" data-toggle="tooltip" title="To edit" routerLink="updateEventCreation/{{event._eventId}}">
+                                    <a data-toggle="tooltip" title="To edit" routerLink="updateEventCreation/{{event._eventId}}">
                                         <i class="glyphicon glyphicon-file"></i>
                                     </a>
-                                    <a href="#" data-toggle="tooltip" title="To delete">
+                                    <a data-toggle="tooltip" title="To delete">
                                         <i class="glyphicon glyphicon-remove"></i>
                                     </a>
 

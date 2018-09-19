@@ -19,16 +19,18 @@
               <div class="input-group-with-errors">
                 <div class="input-group col-md-7">
                   <input list="GuestList" id="inputGuestList" type="email" class="form-control input-md" name="guestEmailId" [(ngModel)]="model.guestEmailId"
-                    placeholder="Guest EmailId Please" #guestEmailId="ngModel" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" [uniqueParam]="guestList"
-                    required appUniqueValidator style="text-transform:lowercase"/>
+                    placeholder="Guest EmailId Please" #guestEmailId="ngModel" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
+                    [uniqueParam]="guestEmailIdsList" required appUniqueValidator style="text-transform:lowercase" />
                   <datalist id="GuestList" *ngFor="let guest of storedGuestList;">
                     <option>{{guest._guestEmailId}}</option>
                   </datalist>
                   <div class="input-group-btn">
-                    <button class="btn btn-primary btn-md" type="button" (click)="addNewGuest()" [disabled]="!GuestListForm.valid">Add Guest</button>
+                    <button class="btn btn-primary btn-md" type="button" (click)="addNewGuest(GuestListForm)">Add Guest</button>
                   </div>
                 </div>
-                <app-show-errors [control]="guestEmailId"></app-show-errors>
+                <div *ngIf="allowValidation">
+                  <app-show-errors [control]="guestEmailId"></app-show-errors>
+                </div>
               </div>
 
 
@@ -43,10 +45,10 @@
                     <tr *ngFor="let guest of guestList; let ind=index">
                       <td>{{guest._guestEmailId}}</td>
                       <td class="enable-remove-icon" *ngIf="!isPageSaved">
-                        <a style="cursor: pointer" (click)="removeGuest(ind)">Remove</a>
+                        <a style="cursor: pointer" (click)="removeGuest(ind,GuestListForm)">Remove</a>
                       </td>
                       <td class="disable-remove-icon" *ngIf="isPageSaved">
-                        <a style="cursor: pointer" (click)="removeGuest(ind)">Remove</a>
+                        <a style="cursor: pointer" (click)="removeGuest(ind,GuestListForm)">Remove</a>
                       </td>
                     </tr>
                   </tbody>
