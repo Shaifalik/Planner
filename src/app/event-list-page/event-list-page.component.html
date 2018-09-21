@@ -14,7 +14,7 @@
                 <div class="panel-heading">
                     All Parties
                 </div>
-
+                <perfect-scrollbar style="max-height: 600px;" [config]="config">
                 <div class="panel-body" id="page-content">
                     <div class="list-group" *ngFor="let event of eventsData">
                         <div class="list-group-item list-group-item-info">
@@ -40,6 +40,7 @@
                         </div>
                     </div>
                 </div>
+            </perfect-scrollbar>
             </div>
         </div>
     </div>

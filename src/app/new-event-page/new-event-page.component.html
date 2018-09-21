@@ -28,7 +28,7 @@
 
               <div class="col-md-4 inner-form">
                 <label class="form-label" for="inputEventDate">Event Date and Time: </label>
-                <input id="inputEventDesc" class="form-control input-md" type="datetime-local" [(ngModel)]="model._eventDate" name="eventDate"
+                <input id="inputEventDate" class="form-control input-md" type="datetime-local" [(ngModel)]="model._eventDate" name="eventDate"
                   #eventDate="ngModel" required/>
                 <app-show-errors [control]="eventDate"></app-show-errors>
               </div>

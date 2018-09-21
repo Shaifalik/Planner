@@ -20,6 +20,13 @@ import { GuestPageComponent } from './guest-page/guest-page.component';
 import { UniqueValidatorDirective } from './validators/unique-validator.directive';
 import { EventDetailsPageComponent } from './event-details-page/event-details-page.component';
 import { OverviewPageService } from './services/overview-page.service';
+import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
+import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
+import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
+ 
+const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
+  suppressScrollX: true
+};
 
 
 @NgModule({
@@ -43,6 +50,7 @@ import { OverviewPageService } from './services/overview-page.service';
     FormsModule,
     HttpModule,
     NgDatepickerModule,
+    PerfectScrollbarModule,
     RouterModule.forRoot([
       { path: '', redirectTo: 'eventplanner/home', pathMatch: 'full' },
       { path: 'eventplanner/home', component: HomePageComponent },
@@ -52,7 +60,10 @@ import { OverviewPageService } from './services/overview-page.service';
       { path: 'eventplanner/eventsList/eventDetails/:id', component: EventDetailsPageComponent },
     ])
   ],
-  providers: [PartyDetailsService,OverviewPageService],
+  providers: [PartyDetailsService,OverviewPageService,{
+    provide: PERFECT_SCROLLBAR_CONFIG,
+    useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
