@@ -7,10 +7,10 @@ import { Event } from '../pojos/event';
 import { Guest } from '../pojos/guest';
 import { Location } from '../pojos/location';
 import { BudgetCategory } from '../pojos/budget-category';
-import { Observable } from 'rxjs/Observable';
 import { Budget } from '../pojos/budget';
 import { OverviewPageService } from './overview-page.service';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs/Rx';
 
 @Injectable()
 export class PartyDetailsService {
@@ -59,7 +59,7 @@ export class PartyDetailsService {
 
   //Handle the error message from backend
   handleErrorObservable(error: Response | any) {
-    return Observable.throw(error);
+    return Observable.throw(error.json().message);
   }
 
 

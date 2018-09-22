@@ -20,8 +20,8 @@ export class BudgetPageComponent implements OnInit {
   private newBudget = new Budget();
   private storedBudget = new Budget();
   private foodItemsList = [];
-  private category = new BudgetCategory(0, "", 0);
-  private ctgyList: Array<BudgetCategory>;
+  category = new BudgetCategory(0, "", 0);
+  ctgyList: Array<BudgetCategory>;
   private result: number;
   private hiddenForm = true;
   private itemFieldIsEmpty = false;
@@ -98,9 +98,9 @@ export class BudgetPageComponent implements OnInit {
   }
 
   onSelectBudget(value) {
-    this.category.budgetCategoryId = value._budgetCategoryId;
-    this.category.budgetCategoryName = value._budgetCategoryName;
-    this.category.budgetCategoryAmount = value._budgetCategoryAmount;
+    this.category._budgetCategoryId = value._budgetCategoryId;
+    this.category._budgetCategoryName = value._budgetCategoryName;
+    this.category._budgetCategoryAmount = value._budgetCategoryAmount;
   }
 
   onSubmit(budgetForm: NgForm) {

@@ -17,7 +17,7 @@ export class EventDetails {
     public EventDetails(){
     }
 
-    public set event(event: Event) {
+    public setEvent(event: Event) {
         this._eventName = event._eventName;
         this._eventDescription = event._eventDesc;
         this._eventDate = event._eventDate;

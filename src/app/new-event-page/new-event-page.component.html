@@ -19,7 +19,7 @@
               <div class="col-md-5 inner-form">
                 <label class="form-label" for="inputEventName"> Event Name:</label>
                 <input #eventName="ngModel" type="text" class="form-control text-line input-md" name="eventName" [(ngModel)]="model._eventName"
-                  placeholder="EventName please" required>
+                  placeholder="Lets have some name" required>
               </div>
 
 
@@ -31,7 +31,7 @@
 
               <div class="col-md-6 inner-form">
                 <label class="form-label" for="inputEventDesc"> Event Description:</label>
-                <textarea id="inputEventDesc" class="form-control input-md" [(ngModel)]="model._eventDesc" placeholder="Please specify some event description"
+                <textarea id="inputEventDesc" class="form-control input-md" [(ngModel)]="model._eventDesc" placeholder="hey It’s been a while since we had some party so let’s have some fun."
                   name="eventDesc" #eventDesc="ngModel" minlength="5" maxlength="200" required>
                 </textarea>
               </div>

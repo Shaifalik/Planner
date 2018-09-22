@@ -20,8 +20,8 @@
                 <div class="input-group col-md-5">
                   <label class="form-label" for="budgetCategory">Select Event Budget</label>
                   <select id="budgetCatgry" class="selectpicker form-control input-md" [ngModel]="category._budgetCategoryName" name="_budgetCategoryName"
-                    (ngModelChange)="onSelectBudget($event)" required aria-placeholder="Select Budget">
-                    <option [ngValue]="ctgy" *ngFor="let ctgy of ctgyList">{{ctgy._budgetCategoryName}}</option>
+                    (ngModelChange)="onSelectBudget($event)">
+                    <option *ngFor="let ctgy of ctgyList" [ngValue]="ctgy">{{ctgy._budgetCategoryName}}</option>
                   </select>
                   <div *ngIf="isLessthanZero">
                     <div class="alert-danger display-none" id="add-item-error">

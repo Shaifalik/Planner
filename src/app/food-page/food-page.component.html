@@ -19,7 +19,7 @@
               <div class="input-group-with-errors">
                 <div class="input-group col-md-7">
                   <input list="FoodList" id="inputFoodItem" type="text" class="form-control input-md" name="foodItem" [(ngModel)]="model.foodItem"
-                    placeholder="Add Food Item" #foodItem="ngModel" pattern="[a-zA-Z ]*" style="text-transform:lowercase" [uniqueParam]="foodItemsList"
+                    placeholder="Bataiye kya khayege" #foodItem="ngModel" pattern="[a-zA-Z ]*" style="text-transform:lowercase" [uniqueParam]="foodItemsList"
                     required appUniqueValidator/>
                   <datalist id="FoodList" *ngFor="let foodData of dbFoodList;">
                     <option>{{foodData._foodItem}}</option>

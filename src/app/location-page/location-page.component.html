@@ -21,7 +21,7 @@
                 <div class="input-group-with-errors">
                   <div class="input-group col-md-4">
                     <input list="locationlist" id="inputLocation" type="text" class="form-control input-md" [(ngModel)]="model.eventLocation"
-                      name="eventLoc" placeholder="Add Venue" #eventLoc="ngModel" pattern="^$|^[A-Za-z0-9 ]+" required [uniqueParam]="venueList"
+                      name="eventLoc" placeholder="chalo chale kahi" #eventLoc="ngModel" pattern="^$|^[A-Za-z0-9 ]+" required [uniqueParam]="venueList"
                       appUniqueValidator style="text-transform:lowercase" />
                     <datalist id="locationlist" *ngFor="let locData of dbLocationList;">
                       <option>{{locData._eventLocation}}</option>
