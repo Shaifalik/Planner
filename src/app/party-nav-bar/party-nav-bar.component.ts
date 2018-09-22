@@ -44,13 +44,18 @@ export class PartyNavBarComponent implements OnInit {
         this.service.isEventPageSaved = true;
         this.service.isGuestPageSaved = true;
         this.service.isLocPageSaved = true;
-        this.enabledSubmitButton=5;
+        this.enabledSubmitButton = 5;
         this.service.cast.subscribe(eventDetails => this.eventDetailsObject = eventDetails);
       });
     }
     // New Event Creation Case
     else {
       this.service.cast.subscribe(eventDetails => this.eventDetailsObject = eventDetails);
+      this.service.isFoodPageSaved = false;
+      this.service.isBudgetPageSaved = false;
+      this.service.isEventPageSaved = false;
+      this.service.isGuestPageSaved = false;
+      this.service.isLocPageSaved = false;
     }
   }
 
