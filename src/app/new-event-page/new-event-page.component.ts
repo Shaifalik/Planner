@@ -25,6 +25,9 @@ export class NewEventPageComponent {
   ngOnInit() {
     this.isPageSaved = this.mainService.isEventPageSaved;
     this.model = this.service.getTempStoredEventData();
+    if(this.model._eventDesc==undefined){
+      this.model._eventDesc="hey It’s been a while since we had some party so let’s have some fun."
+    }
   }
 
   onEdit() {
