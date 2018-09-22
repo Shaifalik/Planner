@@ -1,11 +1,6 @@
 .panel-body{
     color: black;
     background-color:antiquewhite;
-    margin-left:12px
-}
-
-.form{
-    float:left;
 }
 
 .btn-space{
@@ -16,9 +11,17 @@
     padding-bottom:12px;
 }
 
+select.ng-invalid.ng-touched  {
+    border-left: 5px solid #a94442; /* red */
+  }
+
+  input.ng-invalid.ng-touched  {
+    border-left: 5px solid #a94442; /* red */
+  }
+
 .form-group{
     padding-top: 12px;
-    padding-bottom: 12px;
+    padding-bottom: 30px;
     background-color:antiquewhite;
     position: relative;
 }

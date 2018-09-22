@@ -7,7 +7,7 @@
       </div>
 
       <div class="panel-body">
-        <form #newFoodItemsForm="ngForm" (ngSubmit)="onSubmit(newFoodItemsForm)">
+        <form #newFoodForm="ngForm" (ngSubmit)="onSubmit(newFoodItemsForm)">
 
           <button type="button" class="btn btn-primary btn-md pull-right" (click)="onEdit()" [disabled]="!isPageSaved">Edit</button>
           <button type="submit" class="btn btn-primary btn-md btn-space pull-right" [disabled]="foodList.length==0||isPageSaved">
@@ -19,16 +19,18 @@
               <div class="input-group-with-errors">
                 <div class="input-group col-md-7">
                   <input list="FoodList" id="inputFoodItem" type="text" class="form-control input-md" name="foodItem" [(ngModel)]="model.foodItem"
-                    placeholder="Item Name" #foodItem="ngModel" pattern="[a-zA-Z]*" autocapitalize="word" [uniqueParam]="foodItemsList"
-                    appUniqueValidator required/>
+                    placeholder="Add Food Item" #foodItem="ngModel" pattern="[a-zA-Z ]*" style="text-transform:lowercase" [uniqueParam]="foodItemsList"
+                    required appUniqueValidator/>
                   <datalist id="FoodList" *ngFor="let foodData of dbFoodList;">
                     <option>{{foodData._foodItem}}</option>
                   </datalist>
                   <div class="input-group-btn">
-                    <button class="btn btn-primary btn-md" type="button" (click)="addNewFoodItem()" [disabled]="!newFoodItemsForm.valid">Add Item</button>
+                    <button class="btn btn-primary btn-md" type="button" (click)="addNewFoodItem(newFoodForm)">Add Item</button>
                   </div>
                 </div>
-                <app-show-errors [control]="foodItem"></app-show-errors>
+                <div *ngIf="allowValidation">
+                  <app-show-errors [control]="foodItem"></app-show-errors>
+                </div>
               </div>
 
 
@@ -43,10 +45,10 @@
                     <tr *ngFor="let food of foodList; let ind=index">
                       <td>{{food._foodItem}}</td>
                       <td class="enable-remove-icon" *ngIf="!isPageSaved">
-                        <a style="cursor: pointer" (click)="removeFoodItem(ind)">Remove</a>
+                        <a style="cursor: pointer" (click)="removeFoodItem(ind,newFoodForm)">Remove</a>
                       </td>
                       <td class="disable-remove-icon" *ngIf="isPageSaved">
-                        <a style="cursor: pointer" (click)="removeFoodItem(ind)">Remove</a>
+                        <a style="cursor: pointer" (click)="removeFoodItem(ind,newFoodForm)">Remove</a>
                       </td>
                     </tr>
                   </tbody>

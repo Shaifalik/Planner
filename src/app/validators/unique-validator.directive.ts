@@ -21,7 +21,7 @@ export class UniqueValidatorDirective implements Validator {
 
   validateUniqueTextFactory(): ValidatorFn {
     return (control: FormControl) => {
-      if ( (this.paramList.length < 0) || (this.paramList.indexOf(control.value) == -1)) {
+      if ( (this.paramList.length < 0) || (this.paramList.indexOf((control.value).toLowerCase()) == -1)) {
         return null;
       } else {
         return {

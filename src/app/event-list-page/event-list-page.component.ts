@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { EventListService } from '../services/event-list-page.service';
 import { EventDetails } from '../pojos/event-details';
 import { OverviewPageService } from '../services/overview-page.service';
+import { PartyDetailsService } from '../services/party-details.service';
 
 @Component({
   selector: 'app-login-page',
@@ -12,13 +13,11 @@ import { OverviewPageService } from '../services/overview-page.service';
 })
 export class EventListComponent implements OnInit {
   private eventsData: Array<EventDetails>;
-  private pageCount;
-  private sub: any;
-  private id:number;
-  eventGuestList: any;
-  status: any;
+  private eventDetailsObject = new EventDetails();
+  private eventGuestList: any;
+  private status: any;
 
-  constructor(private service:EventListService,private router: Router) { 
+  constructor(private service:EventListService,private mainService:PartyDetailsService,private router: Router) { 
   }
 
   ngOnInit(){
@@ -30,6 +29,7 @@ export class EventListComponent implements OnInit {
   }
   
   redirectToCreateParty() {
+    this.mainService.createnewEventDetails(this.eventDetailsObject);
     this.router.navigateByUrl('eventplanner/newEventCreation');
   }
 

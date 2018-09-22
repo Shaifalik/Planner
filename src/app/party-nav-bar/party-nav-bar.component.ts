@@ -4,6 +4,7 @@ import { PartyDetailsService } from '../services/party-details.service';
 import { EventDetails } from '../pojos/event-details';
 import { BudgetCategory } from '../pojos/budget-category';
 import { OverviewPageService } from '../services/overview-page.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-party-nav-bar',
@@ -26,31 +27,61 @@ export class PartyNavBarComponent implements OnInit {
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
       this.id = +params['id'];
-      if (this.id != undefined) {// In case of Update Event
-        this.overviewService.getEventById(this.id).subscribe((result) => {
-          let eventData = new EventDetails();
-          eventData = result;
-          this.service.editEventDetails(eventData);
-        });
-      }
+      this.initializeData();
       this.visible = 2;
-      this.service.cast.subscribe(eventDetails => this.eventDetailsObject = eventDetails);
     });
   }
 
-  onSubmit() {
+  initializeData() {
+    // Update Event Case
+    if (!isNaN(this.id)) {
+      this.overviewService.getEventById(this.id).subscribe((result) => {
+        let eventData = new EventDetails();
+        eventData = result;
+        this.service.editEventDetails(eventData);
+        this.service.isFoodPageSaved = true;
+        this.service.isBudgetPageSaved = true;
+        this.service.isEventPageSaved = true;
+        this.service.isGuestPageSaved = true;
+        this.service.isLocPageSaved = true;
+        this.enabledSubmitButton=5;
+        this.service.cast.subscribe(eventDetails => this.eventDetailsObject = eventDetails);
+      });
+    }
+    // New Event Creation Case
+    else {
+      this.service.cast.subscribe(eventDetails => this.eventDetailsObject = eventDetails);
+    }
+  }
+
+  onSubmit(eventForm: NgForm) {
     this.service.postEventDetailData(this.eventDetailsObject).subscribe(
-      suc => {
-        this.data = suc;
+      result => {
+        this.data = result;
+        this.service.updateBudgetCategoryData(this.category).subscribe((response) => {
+        });
         this.router.navigateByUrl("/eventplanner/eventsList");
       },
-      err => {
-        this.data = err;
+      error => {
+        this.data = error;
         alert(this.data);
       }
     );
-    this.service.updateBudgetCategoryData(this.category).subscribe((response) => {
-    })
+  }
+
+  onUpdate() {
+    this.service.updateEventDetailData(this.eventDetailsObject).subscribe(
+      result => {
+        this.data = result;
+        this.service.updateBudgetCategoryData(this.category).subscribe((response) => {
+        });
+        this.router.navigateByUrl("/eventplanner/eventsList");
+      },
+      error => {
+        this.data = error;
+        alert(this.data);
+      }
+    );
   }
 
   onChangeTab(event) {
@@ -64,7 +95,6 @@ export class PartyNavBarComponent implements OnInit {
 
   setBudgetCategory(event) {
     this.category = event;
-    this.service.setBudgetCategory(this.category);
   }
 
   onBackButton() {

@@ -17,28 +17,34 @@
             <fieldset [disabled]="isPageSaved">
 
               <div class="form-group col-md-10">
-                <label class="form-label" for="inputLocation"> Venue Location:</label>
+                <label class="form-label" for="inputLocation"> Venue & Address:</label>
                 <div class="input-group-with-errors">
                   <div class="input-group col-md-4">
                     <input list="locationlist" id="inputLocation" type="text" class="form-control input-md" [(ngModel)]="model.eventLocation"
-                      name="eventLoc" placeholder="Add Location" #eventLoc="ngModel" pattern="^$|^[A-Za-z0-9]+" required/>
-                    <datalist id="locationlist" *ngFor="let locData of storedLocationList;">
+                      name="eventLoc" placeholder="Add Venue" #eventLoc="ngModel" pattern="^$|^[A-Za-z0-9 ]+" required [uniqueParam]="venueList"
+                      appUniqueValidator style="text-transform:lowercase" />
+                    <datalist id="locationlist" *ngFor="let locData of dbLocationList;">
                       <option>{{locData._eventLocation}}</option>
                     </datalist>
                   </div>
-                  <app-show-errors [control]="eventLoc"></app-show-errors>
+                  <div *ngIf="allowValidation">
+                    <app-show-errors [control]="eventLoc"></app-show-errors>
+                  </div>
                 </div>
 
                 <div class="input-group-with-errors">
                   <div class="input-group col-md-6">
                     <input type="text " id="inputAddress" class="form-control input-md " [(ngModel)]="model.eventAddress" name="eventAdd" #eventAdd="ngModel"
-                      placeholder="Add Address" required/>
+                      placeholder="Add Address" style="text-transform:lowercase" required/>
                     <div class="input-group-btn">
-                      <button class="btn btn-primary btn-md " type="button" (click)="addNewLocation()">Add Venue</button>
+                      <button class="btn btn-primary btn-md " type="button" (click)="addNewLocation(newLocationForm)">Add Venue Details</button>
                     </div>
                   </div>
-                  <app-show-errors [control]="eventAdd"></app-show-errors>
+                  <div *ngIf="allowValidation">
+                    <app-show-errors [control]="eventAdd"></app-show-errors>
+                  </div>
                 </div>
+
 
                 <div class="col-md-8 loc-list-group">
                   <table class="table Location" *ngIf="locationList?.length ">
@@ -53,15 +59,16 @@
                         <td>{{loc._eventLocation}}</td>
                         <td>{{loc._eventAddress}}</td>
                         <td class="enable-remove-icon" *ngIf="!isPageSaved">
-                          <a style="cursor: pointer" (click)="removeLocation(ind)">Remove</a>
+                          <a style="cursor: pointer" (click)="removeLocation(ind,newLocationForm)">Remove</a>
                         </td>
                         <td class="disable-remove-icon" *ngIf="isPageSaved">
-                          <a style="cursor: pointer" (click)="removeLocation(ind)">Remove</a>
+                          <a style="cursor: pointer" (click)="removeLocation(ind,newLocationForm)">Remove</a>
                         </td>
                       </tr>
                     </tbody>
                   </table>
                 </div>
+
               </div>
             </fieldset>
           </form>

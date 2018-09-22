@@ -4,11 +4,11 @@ import { BudgetCategory } from './budget-category';
 
 @Injectable()
 export class Budget {
-    private _budgetId: number;
-    private _budgetCategoryId: number;
-    private _totalExpense: number;
-    private _totalQuantity: number;
-    private _expenseList: Array<Expense>;
+    public _budgetId: number;
+    public _budgetCategoryId: number;
+    public _totalExpense: number;
+    public _totalQuantity: number;
+    public _expenseList: Array<Expense>;
     
     public get expenseList(): Array<Expense> {
         return this._expenseList;

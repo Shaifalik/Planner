@@ -30,7 +30,6 @@ export class FoodPageService {
     return this.http
       .get('http://localhost:8081/rest/fetchFoodList', options)
       .map((response: Response) => {
-        console.log(response.json());
         return <Array<Food>>response.json()
       });
   }

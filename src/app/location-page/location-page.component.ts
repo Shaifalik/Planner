@@ -11,40 +11,52 @@ import { Form, NgForm } from '@angular/forms';
   providers: [LocationPageService]
 })
 export class LocationPageComponent implements OnInit {
-  private locationList: Array<Location>;
+  locationList: Array<Location>;
   model: Location = new Location("", "");
-  isClickedOnce = false;
-  private storedLocationList: Array<Location>;
-  private isPageSaved: Boolean;
-
-  
+  dbLocationList: Array<Location>;
+  isPageSaved: Boolean;
+  venueList: any;
+  allowValidation: boolean;
   @Output()
   changeTab: EventEmitter<boolean> = new EventEmitter();
+
 
   constructor(private service: LocationPageService,private mainService: PartyDetailsService) {
   }
 
   ngOnInit() {
     this.isPageSaved = this.mainService.isLocPageSaved;
+
     this.locationList = this.service.getStoredTempLocationList();
     if (this.locationList == undefined) {
       this.locationList = [];
     }
-    this.service.getAvailableLocationList().subscribe((result) => { this.storedLocationList = result; });
+
+    if (this.venueList == undefined) {
+      this.venueList = [];
+    }
+
+    this.service.getAvailableLocationList().subscribe((result) => { this.dbLocationList = result; });
   }
 
   // Function to add locations object to LocationList on AddLocation Button
-  addNewLocation() {
-    if (this.model.eventLocation !== '' && this.model.eventAddress !== '') {
-      this.locationList.push(new Location(this.model.eventLocation, this.model.eventAddress));
+  addNewLocation(newLocationForm:NgForm) {
+    this.allowValidation = true;
+    if (this.model.eventLocation !== '' && this.model.eventAddress !== '' && newLocationForm.valid) {
+      this.locationList.push(new Location(this.model.eventLocation.toLowerCase(), 
+      this.model.eventAddress.toLowerCase()));
+      this.venueList.push(this.model.eventLocation.toLowerCase());
       this.model.eventLocation = '';
       this.model.eventAddress = '';
+      this.allowValidation = false;
     }
   }
 
   // Function to remove locations object from LocationList on X Button
-  removeLocation(index: number) {
+  removeLocation(index: number,newLocationForm:NgForm) {
     this.locationList.splice(index, 1);
+    this.venueList.push(index,1);
+    newLocationForm.reset();
   }
 
   onEdit() {

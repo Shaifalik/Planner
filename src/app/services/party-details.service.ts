@@ -28,11 +28,16 @@ export class PartyDetailsService {
   private eventData: any;
   private id: number;
 
-  constructor(private http: Http, private overviewService: OverviewPageService,private router: Router) {
+  constructor(private http: Http, private overviewService: OverviewPageService, private router: Router) {
   }
 
   //function to get the updated data on the event details object
   editEventDetails(eventUpdatedDetails) {
+    this.eventDetails.next(eventUpdatedDetails);
+  }
+
+  //function to get the updated data on the event details object
+  createnewEventDetails(eventUpdatedDetails) {
     this.eventDetails.next(eventUpdatedDetails);
   }
 
@@ -45,8 +50,18 @@ export class PartyDetailsService {
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
     let options = new RequestOptions({ headers: headers });
-    return this.http.post('http://localhost:8081/rest/createEvent', JSON.stringify(model), options).map((response: Response) => response.text());
+    return this.http.post('http://localhost:8081/rest/createEvent', JSON.stringify(model), options)
+      .map((response: Response) => {
+        response.text();
+      })
+      .catch(this.handleErrorObservable);
   }
+
+  //Handle the error message from backend
+  handleErrorObservable(error: Response | any) {
+    return Observable.throw(error);
+  }
+
 
   //Update the data of Budget Category table
   updateBudgetCategoryData(budgetCategory: BudgetCategory): Observable<number> {
@@ -59,13 +74,26 @@ export class PartyDetailsService {
       });
   }
 
-  //function to set the budgetCategory to share it with other components
-  setBudgetCategory(bugCtgy: BudgetCategory) {
-    this.budCtgy = bugCtgy;
+  getBudgetCategory(budCtgy: any): Observable<BudgetCategory> {
+    budCtgy = parseInt(budCtgy);
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    let options = new RequestOptions({ headers: headers });
+    return this.http.get('http://localhost:8081/rest/fetchBudgetCategoryIdData/' + budCtgy, options)
+      .map((response: Response) => {
+        return <BudgetCategory>(response.json());
+      });
   }
 
-  getBudgetCategory(): BudgetCategory {
-    return this.budCtgy;
+  updateEventDetailData(model: any): any {
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    let options = new RequestOptions({ headers: headers });
+    return this.http.post('http://localhost:8081/rest/updateEventDetailData', JSON.stringify(model), options)
+      .map((response: Response) => {
+        response.text();
+      })
+      .catch(this.handleErrorObservable);
   }
 
   // function to persist/edit data on Event Screen

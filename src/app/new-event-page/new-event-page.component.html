@@ -16,13 +16,10 @@
           <fieldset [disabled]="isPageSaved">
 
             <div class="form-group col-md-10">
-              <div class="input-group-with-errors">
-                <div class="col-md-5 inner-form">
-                  <label class="form-label" for="inputEventName"> Event Name:</label>
-                  <input id="inputEventName" type="text" class="form-control input-md" name="eventName" [(ngModel)]="model._eventName" placeholder="EventName please"
-                    #eventName="ngModel" required/>
-                </div>
-                <app-show-errors [control]="eventName"></app-show-errors>
+              <div class="col-md-5 inner-form">
+                <label class="form-label" for="inputEventName"> Event Name:</label>
+                <input #eventName="ngModel" type="text" class="form-control text-line input-md" name="eventName" [(ngModel)]="model._eventName"
+                  placeholder="EventName please" required>
               </div>
 
 
@@ -30,7 +27,6 @@
                 <label class="form-label" for="inputEventDate">Event Date and Time: </label>
                 <input id="inputEventDate" class="form-control input-md" type="datetime-local" [(ngModel)]="model._eventDate" name="eventDate"
                   #eventDate="ngModel" required/>
-                <app-show-errors [control]="eventDate"></app-show-errors>
               </div>
 
               <div class="col-md-6 inner-form">
@@ -38,11 +34,7 @@
                 <textarea id="inputEventDesc" class="form-control input-md" [(ngModel)]="model._eventDesc" placeholder="Please specify some event description"
                   name="eventDesc" #eventDesc="ngModel" minlength="5" maxlength="200" required>
                 </textarea>
-                <span class="error-block">
-                  <app-show-errors [control]="eventDesc"></app-show-errors>
-                </span>
               </div>
-
 
             </div>
           </fieldset>

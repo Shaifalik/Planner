@@ -16,59 +16,56 @@
 
             <div class="main-form">
               <div class="form-group col-md-12">
-                <label class="form-label" for="budgetCategory">Select Event Budget</label>
+
                 <div class="input-group col-md-5">
+                  <label class="form-label" for="budgetCategory">Select Event Budget</label>
                   <select id="budgetCatgry" class="selectpicker form-control input-md" [ngModel]="category._budgetCategoryName" name="_budgetCategoryName"
-                    (ngModelChange)="onSelectBudget($event)" required> Select Budget
+                    (ngModelChange)="onSelectBudget($event)" required aria-placeholder="Select Budget">
                     <option [ngValue]="ctgy" *ngFor="let ctgy of ctgyList">{{ctgy._budgetCategoryName}}</option>
                   </select>
                   <div *ngIf="isLessthanZero">
-                    <div class="alert alert-danger alert-dismissible display-none" id="add-item-error">
+                    <div class="alert-danger display-none" id="add-item-error">
                       <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                       This should be positive
                     </div>
                   </div>
-                  <app-show-errors [control]="_budgetCategoryName"></app-show-errors>
                 </div>
 
                 <div class="input-group col-md-2">
+                  <label class="form-label" for="budgetAmount">Budget Amount</label>
                   <input id="budgetAmount" type="number" class="form-control input-md" [(ngModel)]="category._budgetCategoryAmount" name="_budgetCategoryAmount"
                     placeholder="Budget Amount" readonly/>
-                  <div class="input-group-addon ">
-                    <span class="input-group-text">$</span>
-                  </div>
                 </div>
               </div>
             </div>
 
-            <div class="inner-form">
+
+            <div class="inner-form col-md-12">
+
               <div class="form-group">
                 <label class="form-label" for="foodItem">Food Item</label>
-                <select id="foodItem" class="form-control input-md" [(ngModel)]="expense.food" name="food" #food="ngModel" [uniqueParam]="expensesValidationList"
-                  required appUniqueValidator>
-                  Please select food Item
+                <select id="foodItem" class="form-control input-md" [(ngModel)]="expense._food" name="food" #food="ngModel" [uniqueParam]="expensesValidationList"
+                  appUniqueValidator required>
+                  Select food Item
                   <option [ngValue]="food" *ngFor="let food of foodItemsList">{{food}}</option>
                 </select>
-                <div *ngIf="itemFieldIsEmpty">
-                  <app-show-errors [control]="food"></app-show-errors>
-                </div>
               </div>
+
               <div class="form-group">
                 <label class="form-label" for="foodQuantity">Food Quantity</label>
-                <input id="foodQuantity" type="number" min="1" class="form-control input-md" [(ngModel)]="expense.quantity" name="quantity"
-                  #quantity="ngModel" placeholder="Food Quantity" required />
-                  <app-show-errors [control]="quantity"></app-show-errors>
+                <input id="foodQuantity" type="number" min="1" class="form-control input-md" [ngClass]="{'red-border-class': quantity.errors}"
+                  [(ngModel)]="expense._quantity" name="quantity" #quantity="ngModel" placeholder="Food Quantity" required
+                />
               </div>
+
               <div class="form-group">
                 <label class="form-label" for="foodExpense">Food Expense</label>
-                <div class="input-group">
-                  <input id="foodExpense" type="number" min="1" class="form-control input-md" [(ngModel)]="expense.amount" name="amount" #amount="ngModel"
-                    required />
-                  <div class="input-group-btn">
-                    <button class="btn btn-primary btn-md" type="button" (click)="addNewExpense()">Add Item</button>
-                  </div>
-                </div>
-                  <app-show-errors [control]="amount"></app-show-errors>
+                <input id="foodExpense" type="number" min="1" class="form-control input-md" [(ngModel)]="expense._amount" name="amount" #amount="ngModel"
+                  required />
+              </div>
+
+              <div class="form-group">
+                <button class="btn btn-primary btn-md" type="button" (click)="addNewExpense()" [disabled]="budgetForm.invalid">Add Item</button>
               </div>
             </div>
 
@@ -100,12 +97,12 @@
             <div class="hidden-form" *ngIf="isPageSaved">
               <div class="form-group">
                 <label class="main-label" for="totalExpense">Total Expense</label>
-                <input type="number" class="form-control input-sm pull-right" [(ngModel)]="newBudget.totalExpense" name="totalExpense" readonly>
+                <input type="number" class="form-control input-sm pull-right" [(ngModel)]="newBudget._totalExpense" name="totalExpense" readonly>
               </div>
 
               <div class="form-group">
                 <label class="main-label" for="totalAmount"> Total Quantity :</label>
-                <input type="number" class="form-control input-sm pull-right" [(ngModel)]="newBudget.totalQuantity" name="totalQuantity"
+                <input type="number" class="form-control input-sm pull-right" [(ngModel)]="newBudget._totalQuantity" name="totalQuantity"
                   readonly />
               </div>
             </div>

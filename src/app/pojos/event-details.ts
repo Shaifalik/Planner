@@ -14,10 +14,13 @@ export class EventDetails {
     public _guestList: Array<Guest>;
     public _budget: Budget;
 
-    public setEvent(event: Event) {
-        this.eventName = event.eventName;
-        this.eventDescription = event.eventDesc;
-        this.eventDate = event.eventDate;
+    public EventDetails(){
+    }
+
+    public set event(event: Event) {
+        this._eventName = event._eventName;
+        this._eventDescription = event._eventDesc;
+        this._eventDate = event._eventDate;
     }
 
     public get eventId(): number {

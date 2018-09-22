@@ -17,7 +17,7 @@ export class GuestPageComponent implements OnInit {
   private guestEmailIdsList: Array<String>;
   private model: Guest = new Guest("");
   private isPageSaved: Boolean;
-  private storedGuestList: Array<Guest>;
+  dbGuestList: Array<Guest>;
   allowValidation: boolean;
 
   @Output()
@@ -28,23 +28,24 @@ export class GuestPageComponent implements OnInit {
   ngOnInit(): void {
     //To display the temporary stored data and also on edit button.
     this.guestList = this.mainService.getTempGuestList();
-    this.isPageSaved = this.mainService.isGuestPageSaved;
     if (this.guestList == undefined) {
       this.guestList = [];
     }
+
+    this.isPageSaved = this.mainService.isGuestPageSaved;
+
     if (this.guestEmailIdsList == undefined) {
       this.guestEmailIdsList = [];
     }
     // To show Drop down list of GuestList
-    this.service.getAvailableGuestList().subscribe((result) => { this.storedGuestList = result; });
+    this.service.getAvailableGuestList().subscribe((result) => { this.dbGuestList = result; });
   }
 
   addNewGuest(GuestListForm:NgForm) {
     this.allowValidation = true;
     if (this.model.guestEmailId !== '' && GuestListForm.valid) {
-      this.model.guestEmailId = this.model.guestEmailId.toLowerCase();
-      this.guestList.push(new Guest(this.model.guestEmailId));
-      this.guestEmailIdsList.push(this.model.guestEmailId);
+      this.guestList.push(new Guest(this.model.guestEmailId.toLowerCase()));
+      this.guestEmailIdsList.push(this.model.guestEmailId.toLowerCase());
       this.model.guestEmailId = '';
       this.allowValidation = false;
     }

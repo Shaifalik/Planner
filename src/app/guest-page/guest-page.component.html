@@ -19,9 +19,9 @@
               <div class="input-group-with-errors">
                 <div class="input-group col-md-7">
                   <input list="GuestList" id="inputGuestList" type="email" class="form-control input-md" name="guestEmailId" [(ngModel)]="model.guestEmailId"
-                    placeholder="Guest EmailId Please" #guestEmailId="ngModel" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
+                    placeholder="Add Guest EmailId" #guestEmailId="ngModel" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$"
                     [uniqueParam]="guestEmailIdsList" required appUniqueValidator style="text-transform:lowercase" />
-                  <datalist id="GuestList" *ngFor="let guest of storedGuestList;">
+                  <datalist id="GuestList" *ngFor="let guest of dbGuestList;">
                     <option>{{guest._guestEmailId}}</option>
                   </datalist>
                   <div class="input-group-btn">

@@ -1,10 +1,17 @@
 <div class="container-fluid party-nav-bar" id="party-nav-bar">
 
-  <form #eventForm="ngForm" (ngSubmit)="onSubmit()" class="ui form">
+  <form #eventForm="ngForm" (ngSubmit)="onSubmit(eventForm)" class="ui form">
+
     <div class="col-md-12 header-area">
-      <button class="col-md-2 area" type="submit" id="main-page-button" class="btn btn-primary btn-md pull-right" [disabled]="enabledSubmitButton!=5">Submit Details</button>
+      <div *ngIf="router.url === '/eventplanner/newEventCreation'; else UpdateTemplate">
+        <button class="col-md-2 area" type="submit" id="main-page-button" class="btn btn-primary btn-md pull-right" [disabled]="enabledSubmitButton!=5">Submit Details</button>
+      </div>
+      <ng-template #UpdateTemplate>
+          <button class="col-md-2 area" type="button" id="main-page-button" class="btn btn-primary btn-md pull-right" (click)=onUpdate() [disabled]="enabledSubmitButton!=5">Update Details</button>
+      </ng-template>
       <button class="col-md-2 area" type="button" id="main-page-button" class="btn btn-primary btn-md pull-left" (click)=onBackButton()>Go Back</button>
     </div>
+
     <div class="btn-group" id="page-header">
       <button type="button" style="width:20%" class="btn btn-primary segmentedButton" (click)="visible=2">New Party</button>
       <button type="button" style="width:20%" class="btn btn-primary segmentedButton" (click)="visible=3">Food and Beverages</button>
@@ -25,7 +32,7 @@
     </div>
 
     <div *ngIf="visible === 5">
-      <app-location-page (changeTab)=onChangeTab($event) ></app-location-page>
+      <app-location-page (changeTab)=onChangeTab($event)></app-location-page>
     </div>
 
     <div *ngIf="visible === 6">

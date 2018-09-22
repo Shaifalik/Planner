@@ -2,10 +2,10 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class Expense {
-    private _expenseId: number;
-    private _food: string;
-    private _amount: number;
-    private _quantity: number;
+    public _expenseId: number;
+    public _food: string;
+    public _amount: number;
+    public _quantity: number;
 
     constructor(food: string, amount: number, quantity: number) {
         this._food = food;

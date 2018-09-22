@@ -2,9 +2,9 @@ import { Injectable } from "@angular/core";
 
 @Injectable()
 export class BudgetCategory {
-    private _budgetCategoryId: number;
-    private _budgetCategoryName: string;
-    private _budgetCategoryAmount: number;
+    public _budgetCategoryId: number;
+    public _budgetCategoryName: string;
+    public _budgetCategoryAmount: number;
 
     constructor(_budgetCategoryId: number, _budgetCategoryName: string, _budgetCategoryAmount: number) {
         this._budgetCategoryId = _budgetCategoryId;

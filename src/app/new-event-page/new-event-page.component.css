@@ -1,9 +1,17 @@
 .panel-body{
-    color: black;
+  color: black;
 }
 
+input.ng-invalid.ng-touched  {
+  border-left: 5px solid #a94442; /* red */
+}
+
+textarea.ng-invalid.ng-touched  {
+border-left: 5px solid #a94442; /* red */
+}
+  
 .btn-space{
-    margin-right:1%;
+margin-right:1%;
 }
 
 .form-group{

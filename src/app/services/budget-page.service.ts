@@ -25,7 +25,7 @@ export class BudgetPageService {
   calculateTotalExpense(expensesList: Array<Expense>) {
     let totalexpense = 0;
     expensesList.forEach(function (value) {
-      totalexpense = value.amount + totalexpense;
+      totalexpense = value._amount + totalexpense;
     });
     return totalexpense;
   }
@@ -34,7 +34,7 @@ export class BudgetPageService {
   calculateTotalQuantity(expensesList: Array<Expense>) {
     let totalQuantity = 0;
     expensesList.forEach(function (value) {
-      totalQuantity = value.quantity + totalQuantity;
+      totalQuantity = value._quantity + totalQuantity;
     });
     return totalQuantity;
   }
@@ -65,7 +65,7 @@ export class BudgetPageService {
     this.foodList = this.service.getStoredFoodList();
     if (this.foodList != undefined) {
       for (let food of this.foodList) {
-        this.foodItemsList.push(food.foodItem);
+        this.foodItemsList.push(food._foodItem);
       }
     }
     return this.foodItemsList;

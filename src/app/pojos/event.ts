@@ -4,9 +4,9 @@ import { Location } from './location';
 
 @Injectable()
 export class Event {
-    private _eventName: string;
-    private _eventDesc: string;
-    private _eventDate: Date;
+    public _eventName: string;
+    public _eventDesc: string;
+    public _eventDate: Date;
     
     constructor(event_name: string, event_description: string, event_date: Date) {
         this.eventName = event_name;

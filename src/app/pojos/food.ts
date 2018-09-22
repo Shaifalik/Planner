@@ -1,6 +1,6 @@
 export class Food {
-    private _foodId: number;
-    constructor( private _foodItem: string) {
+    public _foodId: number;
+    constructor( public _foodItem: string) {
     }
 
     public get foodId(): number {
