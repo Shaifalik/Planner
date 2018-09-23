@@ -77,6 +77,7 @@ export class BudgetPageComponent implements OnInit {
   //To add Expenses
   addNewExpense() {
     if (this.expense.food !== '' && this.expense.amount !== 0 && this.expense.quantity !== 0) {
+      this.expense.amount = this.expense.amount * this.expense.quantity;
       this.expensesList.push(new Expense(this.expense.food, this.expense.amount, this.expense.quantity));
       this.expensesValidationList.push(this.expense.food);
       this.expense.food = '';

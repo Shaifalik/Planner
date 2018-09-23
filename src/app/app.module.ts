@@ -5,6 +5,13 @@ import { HttpModule } from '@angular/http';
 import { NgDatepickerModule } from 'ng2-datepicker';
 
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+//import { routing } from './app.routing';
+
+import { AlertComponent } from './_directives/index';
+import { AuthGuard } from './_guards/index';
+import { JwtInterceptor } from './_helpers/index';
+import { fakeBackendProvider } from './_helpers/index';
 import { AppComponent } from './app.component';
 import { NavigatorBarComponent } from './navigator-bar/navigator-bar.component';
 import { HomePageComponent } from './home-page/home-page.component';
@@ -23,7 +30,10 @@ import { OverviewPageService } from './services/overview-page.service';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
- 
+import { AlertService, AuthenticationService, UserService } from './_services/index';
+import { LoginComponent } from './login/index';
+import { RegisterComponent } from './register/index';
+
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
 };
@@ -43,12 +53,16 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     BudgetPageComponent,
     GuestPageComponent,
     UniqueValidatorDirective,
-    EventDetailsPageComponent
+    EventDetailsPageComponent,
+    AlertComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule,
+	  HttpClientModule,
+     HttpModule,
     NgDatepickerModule,
     PerfectScrollbarModule,
     RouterModule.forRoot([
@@ -58,12 +72,27 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
       { path: 'eventplanner/newEventCreation', component: PartyNavBarComponent },
       { path: 'eventplanner/eventsList/updateEventCreation/:id', component: PartyNavBarComponent },
       { path: 'eventplanner/eventsList/eventDetails/:id', component: EventDetailsPageComponent },
+      { path: 'login', component: LoginComponent },
+      { path: 'register', component: RegisterComponent },
+      { path: '**', redirectTo: '' }
     ])
   ],
   providers: [PartyDetailsService,OverviewPageService,{
     provide: PERFECT_SCROLLBAR_CONFIG,
     useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
-  }],
+  },
+  AuthGuard,
+        AlertService,
+        AuthenticationService,
+        UserService,
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: JwtInterceptor,
+            multi: true
+        },
+
+        // provider used to create fake backend
+        fakeBackendProvider],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
