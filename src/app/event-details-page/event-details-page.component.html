@@ -12,7 +12,7 @@
               <div class="panel panel-success">
                 <div class="panel-heading">{{eventData._eventName}} </div>
                 <div class="panel-body">
-                  <div>Event Data: {{eventData._eventDate}}</div>
+                  <div>Event Date: {{eventData._eventDate |date:'MMM d, y @ h:mma - EEEE'}}</div>
                   <div>
                     <p>{{eventData._eventDescription}}</p>
                   </div>
