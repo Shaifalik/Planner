@@ -1,6 +1,6 @@
 export class Guest {
-    private _guestListId: number;
-    constructor(private _guestEmailId: string){}
+    public _guestListId: number;
+    constructor(public _guestEmailId: string){}
     
     public get guestEmailId(): string {
         return this._guestEmailId;

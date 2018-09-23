@@ -18,7 +18,7 @@ export class FoodPageComponent implements OnInit {
   foodItemsList: Array<string>;
   private foodList: Array<Food>;
   private model: Food = new Food("");
-  dbFoodList: Array<Food>;
+  dbFoodList: Array<string>;
   isPageSaved: Boolean;
   allowValidation: boolean;
 
@@ -43,7 +43,8 @@ export class FoodPageComponent implements OnInit {
     }
 
     // DbFoodList to show list food options from db in drop down
-    this.foodService.getAvailableFoodList().subscribe((result) => { this.dbFoodList = result; });
+    this.foodService.getAvailableFoodList().subscribe((result) =>
+     { this.dbFoodList = result; });
   }
 
   addNewFoodItem(newFoodForm: NgForm) {

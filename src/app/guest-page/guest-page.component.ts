@@ -17,7 +17,7 @@ export class GuestPageComponent implements OnInit {
   private guestEmailIdsList: Array<String>;
   private model: Guest = new Guest("");
   private isPageSaved: Boolean;
-  dbGuestList: Array<Guest>;
+  dbGuestList: Array<string>;
   allowValidation: boolean;
 
   @Output()
@@ -38,10 +38,13 @@ export class GuestPageComponent implements OnInit {
       this.guestEmailIdsList = [];
     }
     // To show Drop down list of GuestList
-    this.service.getAvailableGuestList().subscribe((result) => { this.dbGuestList = result; });
+    this.service.getAvailableGuestList().subscribe((result) => {
+    this.dbGuestList = result;
+    });
+
   }
 
-  addNewGuest(GuestListForm:NgForm) {
+  addNewGuest(GuestListForm: NgForm) {
     this.allowValidation = true;
     if (this.model.guestEmailId !== '' && GuestListForm.valid) {
       this.guestList.push(new Guest(this.model.guestEmailId.toLowerCase()));
@@ -51,9 +54,9 @@ export class GuestPageComponent implements OnInit {
     }
   }
 
-  removeGuest(index: number,guestListForm:NgForm) {
+  removeGuest(index: number, guestListForm: NgForm) {
     this.guestList.splice(index, 1);
-    this.guestEmailIdsList.splice(index,1);
+    this.guestEmailIdsList.splice(index, 1);
     guestListForm.reset();
   }
 

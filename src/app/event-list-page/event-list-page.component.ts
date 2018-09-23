@@ -17,31 +17,34 @@ export class EventListComponent implements OnInit {
   private eventGuestList: any;
   private status: any;
 
-  constructor(private service:EventListService,private mainService:PartyDetailsService,private router: Router) { 
+  constructor(private service: EventListService, private mainService: PartyDetailsService, private router: Router) {
   }
 
-  ngOnInit(){
-    this.service.getEvents().subscribe((result) => { this.eventsData = result; });
+  ngOnInit() {
+    this.service.getEvents().subscribe((result)  =>  {  this.eventsData  =  result; });
   }
-  
-  createPageCountArray(){
+
+  createPageCountArray() {
     //this.pageCount=Array(pageCount).fill().map((x,i)=>i);
   }
-  
+
   redirectToCreateParty() {
     this.mainService.createnewEventDetails(this.eventDetailsObject);
     this.router.navigateByUrl('eventplanner/newEventCreation');
   }
 
 
-  onEmailIcon(id:number){
-    for(let event of this.eventsData){
-      if(event._eventId===id){
-        this.eventGuestList=event._guestList;
+  onEmailIcon(id: number) {
+    let eventId: any;
+    for (let event of this.eventsData) {
+      if (event._eventId === id) {
+        eventId = id;
+        this.eventGuestList = event._guestList;
+        break;
       }
     }
-    this.service.sendEmailtoGuestList(this.eventGuestList).subscribe((result)=>{
-      this.status=result;
+    this.service.sendEmailtoGuestList(this.eventGuestList, eventId).subscribe((result) => {
+      this.status = result;
       alert(this.status);
     });
   }

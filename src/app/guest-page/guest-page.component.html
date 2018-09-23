@@ -19,10 +19,10 @@
               <div class="input-group-with-errors">
                 <div class="input-group col-md-7">
                   <input list="GuestList" id="inputGuestList" type="email" class="form-control input-md" name="guestEmailId" [(ngModel)]="model.guestEmailId"
-                    placeholder="Kis kis ko bulaye EmailId se" #guestEmailId="ngModel" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$"
+                    placeholder="Kis kis ko bulaye " #guestEmailId="ngModel" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$"
                     [uniqueParam]="guestEmailIdsList" required appUniqueValidator style="text-transform:lowercase" />
-                  <datalist id="GuestList" *ngFor="let guest of dbGuestList;">
-                    <option>{{guest._guestEmailId}}</option>
+                  <datalist id="GuestList" *ngFor="let guest of dbGuestList">
+                    <option>{{guest}}</option>
                   </datalist>
                   <div class="input-group-btn">
                     <button class="btn btn-primary btn-md" type="button" (click)="addNewGuest(GuestListForm)">Add Guest</button>

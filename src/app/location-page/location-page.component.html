@@ -24,7 +24,7 @@
                       name="eventLoc" placeholder="chalo chale kahi" #eventLoc="ngModel" pattern="^$|^[A-Za-z0-9 ]+" required [uniqueParam]="venueList"
                       appUniqueValidator style="text-transform:lowercase" />
                     <datalist id="locationlist" *ngFor="let locData of dbLocationList;">
-                      <option>{{locData._eventLocation}}</option>
+                      <option>{{locData}}</option>
                     </datalist>
                   </div>
                   <div *ngIf="allowValidation">
