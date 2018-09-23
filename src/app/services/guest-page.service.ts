@@ -14,19 +14,18 @@ export class GuestPageService {
   }
 
   saveGuestList(guestList: Array<Guest>) {
-    this.eventDetailsObject.guestList = guestList;
+    this.eventDetailsObject._guestList = guestList;
     this.service.editEventDetails(this.eventDetailsObject);
   }
 
-  getAvailableGuestList():Observable<Array<Guest>>{
+  getAvailableGuestList():Observable<Array<string>>{
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
     let options = new RequestOptions({ headers: headers });
     return this.http
       .get('http://localhost:8081/rest/fetchGuestList', options)
       .map((response: Response) => {
-        console.log(response.json());
-        return <Array<Guest>>response.json()
+        return <Array<string>>response.json()
       });
   }
 

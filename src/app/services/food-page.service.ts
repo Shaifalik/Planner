@@ -13,24 +13,24 @@ export class FoodPageService {
     this.service.cast.subscribe(eventDetails => this.eventDetailsObject = eventDetails);
   }
 
-  getStoredList(){
+  getStoredList() {
     return this.service.getStoredFoodList();
   }
 
   saveFoodList(foodList: Array<Food>) {
-    this.eventDetailsObject.foodList = foodList;
+    this.eventDetailsObject._foodList = foodList;
     this.service.editEventDetails(this.eventDetailsObject);
   }
 
   //function to fetch the food items stored in database
-  getAvailableFoodList(): Observable<Array<Food>> {
+  getAvailableFoodList(): Observable<Array<string>> {
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
     let options = new RequestOptions({ headers: headers });
     return this.http
       .get('http://localhost:8081/rest/fetchFoodList', options)
       .map((response: Response) => {
-        return <Array<Food>>response.json()
+        return <Array<string>>response.json()
       });
   }
 

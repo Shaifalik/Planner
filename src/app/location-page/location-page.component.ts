@@ -13,7 +13,7 @@ import { Form, NgForm } from '@angular/forms';
 export class LocationPageComponent implements OnInit {
   locationList: Array<Location>;
   model: Location = new Location("", "");
-  dbLocationList: Array<Location>;
+  dbLocationList: Array<string>;
   isPageSaved: Boolean;
   venueList: any;
   allowValidation: boolean;
@@ -21,7 +21,7 @@ export class LocationPageComponent implements OnInit {
   changeTab: EventEmitter<boolean> = new EventEmitter();
 
 
-  constructor(private service: LocationPageService,private mainService: PartyDetailsService) {
+  constructor(private service: LocationPageService, private mainService: PartyDetailsService) {
   }
 
   ngOnInit() {
@@ -40,11 +40,11 @@ export class LocationPageComponent implements OnInit {
   }
 
   // Function to add locations object to LocationList on AddLocation Button
-  addNewLocation(newLocationForm:NgForm) {
+  addNewLocation(newLocationForm: NgForm) {
     this.allowValidation = true;
     if (this.model.eventLocation !== '' && this.model.eventAddress !== '' && newLocationForm.valid) {
-      this.locationList.push(new Location(this.model.eventLocation.toLowerCase(), 
-      this.model.eventAddress.toLowerCase()));
+      this.locationList.push(new Location(this.model.eventLocation.toLowerCase(),
+        this.model.eventAddress.toLowerCase()));
       this.venueList.push(this.model.eventLocation.toLowerCase());
       this.model.eventLocation = '';
       this.model.eventAddress = '';
@@ -53,9 +53,9 @@ export class LocationPageComponent implements OnInit {
   }
 
   // Function to remove locations object from LocationList on X Button
-  removeLocation(index: number,newLocationForm:NgForm) {
+  removeLocation(index: number, newLocationForm: NgForm) {
     this.locationList.splice(index, 1);
-    this.venueList.push(index,1);
+    this.venueList.push(index, 1);
     newLocationForm.reset();
   }
 
@@ -66,7 +66,7 @@ export class LocationPageComponent implements OnInit {
   }
 
   // Function to submit locations object to backend
-  onLocationSubmit(newLocationForm:NgForm) {
+  onLocationSubmit(newLocationForm: NgForm) {
     this.service.saveLocationList(this.locationList);
     this.mainService.isLocPageSaved = true;
     this.isPageSaved = true;

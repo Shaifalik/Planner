@@ -21,11 +21,11 @@ export class EventListService {
       });
   }
 
-  sendEmailtoGuestList(guestList: Array<Guest>) :Observable<string>{
+  sendEmailtoGuestList(guestList: Array<Guest>,eventId:any) :Observable<string>{
+    eventId = parseInt(eventId);
     const headers = new Headers();
-    headers.append('Content-Type', 'application/text');
-    let options = new RequestOptions({ headers: headers });
-    return this.http.post('http://localhost:8081/rest/sendEmail',guestList)
+    headers.append('Content-Type', 'application/json');
+    return this.http.post('http://localhost:8081/rest/sendEmail/'+eventId,guestList)
       .map((res: Response) => {
         return <string>(res.text());
       });

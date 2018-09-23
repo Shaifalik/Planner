@@ -18,11 +18,11 @@
               <label class="form-label" for="inputFoodItem"> Food Item:</label>
               <div class="input-group-with-errors">
                 <div class="input-group col-md-7">
-                  <input list="FoodList" id="inputFoodItem" type="text" class="form-control input-md" name="foodItem" [(ngModel)]="model.foodItem"
+                  <input list="FoodList" id="inputFoodItem" type="text" class="form-control input-md" name="foodItem" [(ngModel)]="model._foodItem"
                     placeholder="Bataiye kya khayege" #foodItem="ngModel" pattern="[a-zA-Z ]*" style="text-transform:lowercase" [uniqueParam]="foodItemsList"
                     required appUniqueValidator/>
-                  <datalist id="FoodList" *ngFor="let foodData of dbFoodList;">
-                    <option>{{foodData._foodItem}}</option>
+                  <datalist id="FoodList" *ngFor="let foodData of dbFoodList" >
+                    <option [value]="foodData">{{foodData}}</option>
                   </datalist>
                   <div class="input-group-btn">
                     <button class="btn btn-primary btn-md" type="button" (click)="addNewFoodItem(newFoodForm)">Add Item</button>

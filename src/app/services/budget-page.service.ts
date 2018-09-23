@@ -41,7 +41,7 @@ export class BudgetPageService {
 
   //Saving the budget object in Event Details Object
   saveBudget(budget: Budget) {
-    this.eventDetailsObject.budget = budget;
+    this.eventDetailsObject._budget = budget;
     this.service.editEventDetails(this.eventDetailsObject);
   }
 

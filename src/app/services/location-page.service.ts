@@ -15,9 +15,8 @@ export class LocationPageService {
   }
 
   saveLocationList(LocationList: Array<Location>) {
-    this.eventDetailsObject.locationList = LocationList;
+    this.eventDetailsObject._locationList = LocationList;
     this.service.editEventDetails(this.eventDetailsObject);
-    console.log(this.eventDetailsObject);
   }
 
   // function to post event data on db
@@ -25,15 +24,14 @@ export class LocationPageService {
     return this.service.getStoredLocationList();
   }
 
-  getAvailableLocationList():Observable<Array<Location>>{
+  getAvailableLocationList():Observable<Array<string>>{
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
     let options = new RequestOptions({ headers: headers });
     return this.http
       .get('http://localhost:8081/rest/fetchLocationList', options)
       .map((response: Response) => {
-        console.log(response.json());
-        return <Array<Location>>response.json()
+        return <Array<string>>response.json()
       });
   }
 }
